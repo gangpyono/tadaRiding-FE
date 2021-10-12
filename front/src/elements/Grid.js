@@ -1,5 +1,6 @@
-import React, { Children } from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
+
 const Grid = (props) => {
   const {
     children,
@@ -12,6 +13,7 @@ const Grid = (props) => {
     isFlex,
     borderRadius,
     border,
+    isShadow,
   } = props;
 
   const styles = {
@@ -24,6 +26,7 @@ const Grid = (props) => {
     isFlex,
     borderRadius,
     border,
+    isShadow,
   };
 
   return (
@@ -44,23 +47,29 @@ Grid.defaultProps = {
   isFlex: false,
   borderRadius: false,
   border: false,
+  isShadow: false,
 };
 
 const GridBox = styled.div`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   box-sizing: border-box;
-  ${(props) => (props.padding ? ` padding : ${props.padding}; ` : '')};
-  ${(props) => (props.margin ? ` margin : ${props.margin}; ` : '')};
-  ${(props) => (props.bg ? `background-color : ${props.bg}` : '')};
+  ${(props) => (props.padding ? `padding : ${props.padding}; ` : "")};
+  ${(props) => (props.margin ? `margin : ${props.margin}; ` : "")};
+  ${(props) => (props.bg ? `background-color : ${props.bg}` : "")};
   ${(props) =>
     props.isFlex
       ? `display : flex; align-items : center ; justify-content : space-between;`
-      : ''};
+      : ""};
 
-  ${(props) => (props.center ? `text-align: center;` : '')}
-  ${(props) => (props.borderRadius ? `border-radius : ${props.borderRadius};` : '')};
-  ${(props) => (props.border ? `border : ${props.border};` : '')};
+  ${(props) => (props.center ? `text-align: center;` : "")}
+  ${(props) =>
+    props.borderRadius ? `border-radius : ${props.borderRadius};` : ""};
+  ${(props) => (props.border ? `border : ${props.border};` : "")};
+  ${(props) =>
+    props.isShadow
+      ? `box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.12);`
+      : ""};
 `;
 
 export default Grid;
