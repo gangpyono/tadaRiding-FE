@@ -13,6 +13,7 @@ const Grid = (props) => {
     isFlex,
     borderRadius,
     border,
+    isShadow,
   } = props;
 
   const styles = {
@@ -25,6 +26,7 @@ const Grid = (props) => {
     isFlex,
     borderRadius,
     border,
+    isShadow,
   };
 
   return (
@@ -45,6 +47,7 @@ Grid.defaultProps = {
   isFlex: false,
   borderRadius: false,
   border: false,
+  isShadow: false,
 };
 
 const GridBox = styled.div`
@@ -63,6 +66,10 @@ const GridBox = styled.div`
   ${(props) =>
     props.borderRadius ? `border-radius : ${props.borderRadius};` : ""};
   ${(props) => (props.border ? `border : ${props.border};` : "")};
+  ${(props) =>
+    props.isShadow
+      ? `box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.12);`
+      : ""};
 `;
 
 export default Grid;
