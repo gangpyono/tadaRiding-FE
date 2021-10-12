@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const Image = (props) => {
   const { size, src } = props;
@@ -9,7 +9,7 @@ const Image = (props) => {
   };
   return (
     <React.Fragment>
-      <div style={{ width: "500px", height: "500px" }}>
+      <div style={{ width: '500px', height: '500px' }}>
         <ImageOutter>
           <ImageInner {...styles}></ImageInner>
         </ImageOutter>
@@ -19,7 +19,7 @@ const Image = (props) => {
 };
 
 Text.defaultProps = {
-  src: "https://aomori-cycling.com/kr/wp-content/themes/cycling/images/basi_img-road.jpg",
+  src: 'https://aomori-cycling.com/kr/wp-content/themes/cycling/images/basi_img-road.jpg',
   size: 200,
 };
 
@@ -31,7 +31,7 @@ const ImageInner = styled.div`
   position: relative;
   padding-top: 75%;
   overflow: hidden;
-  background-image: url("${(props) => props.src}");
+  background-image: url('${(props) => props.src}');
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
