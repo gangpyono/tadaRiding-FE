@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
+// elements
+import { Grid, Text } from "./index";
+
 const Input = (props) => {
   const {
     width,
@@ -25,32 +28,30 @@ const Input = (props) => {
   if (multiLine) {
     return (
       <>
-        <div style={{ margin: "30px" }}>
-          <Textarea
-            {...styles}
-            rows={10}
-            label={label}
-            placeholder={placeholder}
-            enterSubmit={enterSubmit}
-            _onChange={_onChange}
-          />
-        </div>
+        {label && <Text>{label}</Text>}
+        <Textarea
+          {...styles}
+          rows={10}
+          label={label}
+          placeholder={placeholder}
+          enterSubmit={enterSubmit}
+          _onChange={_onChange}
+        />
       </>
     );
   }
 
   return (
     <>
-      <div style={{ margin: "30px" }}>
-        <ElInput
-          {...styles}
-          label={label}
-          type={type}
-          placeholder={placeholder}
-          enterSubmit={enterSubmit}
-          _onChange={_onChange}
-        />
-      </div>
+      {label && <Text>{label}</Text>}
+      <ElInput
+        {...styles}
+        label={label}
+        type={type}
+        placeholder={placeholder}
+        enterSubmit={enterSubmit}
+        _onChange={_onChange}
+      />
     </>
   );
 };
