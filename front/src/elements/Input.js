@@ -2,11 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 // elements
-<<<<<<< HEAD
 import { Text } from "./index";
-=======
-import { Grid, Text } from "./index";
->>>>>>> login
 
 const Input = (props) => {
   const {
