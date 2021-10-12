@@ -5,7 +5,7 @@ const Header = (props) => {
   // 로그인 안 했을 때 헤더
   return (
     <>
-      <Grid isFlex height="80px" padding="0px 150px" bg="#afc2cb">
+      <Grid isFlex height="80px" padding="0px 10%" bg="#afc2cb">
         <Text size="2em" bold color="#ffffee">
           Tada Riding
         </Text>
