@@ -11,12 +11,12 @@ import PostWrite from '../pages/PostWrite';
 function App() {
   return (
     <>
-      <Route path="/Login" exact component={Login} />
+      {/* <Route path="/Login" exact component={Login} />
       <Route path="/SignUp" exact component={SignUp} />
-      <Route path="/Mypage" exact component={MyPage} />
+      <Route path="/Mypage" exact component={MyPage} /> */}
       <Route path="/" exact component={PostList} />
-      <Route path="/PostWrite" exact component={PostWrite} />
-      <Route path="/PostDetail" exact component={PostDetail} />
+      {/* <Route path="/PostWrite" exact component={PostWrite} />
+      <Route path="/PostDetail" exact component={PostDetail} /> */}
     </>
   );
 }

@@ -9,16 +9,14 @@ const Image = (props) => {
   };
   return (
     <React.Fragment>
-      <div style={{ width: '500px', height: '500px' }}>
-        <ImageOutter>
-          <ImageInner {...styles}></ImageInner>
-        </ImageOutter>
-      </div>
+      <ImageOutter>
+        <ImageInner {...styles}></ImageInner>
+      </ImageOutter>
     </React.Fragment>
   );
 };
 
-Text.defaultProps = {
+Image.defaultProps = {
   src: 'https://aomori-cycling.com/kr/wp-content/themes/cycling/images/basi_img-road.jpg',
   size: 200,
 };
