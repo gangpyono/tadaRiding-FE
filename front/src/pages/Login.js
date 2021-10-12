@@ -10,9 +10,8 @@ const Login = () => {
         width="450px"
         margin="100px auto"
         padding="16px"
-        border="5px solid #fbe9e7"
         borderRadius="15px"
-        bg="#fbe9e7"
+        bg="#e1f5fe"
         isShadow
       >
         <Text margin="80px" size="2em" bold align="center">
