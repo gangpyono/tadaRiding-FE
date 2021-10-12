@@ -6,18 +6,18 @@ import { Grid, Button, Input, Text } from "../elements/index";
 const Login = () => {
   return (
     <>
+      <Text margin="60px" size="2em" color="#849298" bold align="center">
+        Login
+      </Text>
       <Grid
         width="450px"
-        margin="100px auto"
+        margin="50px auto"
         padding="16px"
         borderRadius="15px"
         bg="#e1f5fe"
         isShadow
       >
-        <Text margin="80px" size="2em" bold align="center">
-          Login
-        </Text>
-        <Grid padding="25px 0px" width="77%" margin="0 auto">
+        <Grid padding="60px 0px 25px 0px" width="77%" margin="0 auto">
           <Input
             padding="10px"
             width="100%"
@@ -35,7 +35,7 @@ const Login = () => {
           ></Input>
         </Grid>
 
-        <Grid isFlex width="250px" margin="50px auto">
+        <Grid isFlex width="250px" margin="60px auto">
           <Button
             padding="10px 20px"
             backgroundColor="#ffffee"
