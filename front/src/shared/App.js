@@ -1,12 +1,18 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-import Login from '../pages/Login';
-import SignUp from '../pages/SignUp';
-import MyPage from '../pages/MyPage';
-import PostDetail from '../pages/PostDetail';
+//elements
+import { Grid } from '../elements';
+// components
+import Header from './Header';
+
+// pages
+//import Login from "../pages/Login";
+// import SignUp from "../pages/SignUp";
+// import MyPage from '../pages/MyPage';
+// import PostDetail from '../pages/PostDetail';
 import PostList from '../pages/PostList';
-import PostWrite from '../pages/PostWrite';
+// import PostWrite from '../pages/PostWrite';
 
 function App() {
   return (

@@ -10,6 +10,7 @@ const Input = (props) => {
     height,
     margin,
     padding,
+    radius,
     label,
     multiLine,
     type,
@@ -23,6 +24,7 @@ const Input = (props) => {
     height: height,
     margin: margin,
     padding: padding,
+    radius: radius,
   };
 
   if (multiLine) {
@@ -61,6 +63,7 @@ Input.defaultProps = {
   height: "",
   margin: "",
   padding: "",
+  radius: "",
   label: "",
   type: "text",
   multiLine: false,
@@ -76,10 +79,11 @@ const ElInput = styled.input`
   padding: ${(props) => props.padding};
   box-sizing: border-box;
   border: none;
-  border-bottom: 2px solid gray;
+  /* border-bottom: 1px solid gray; */
+  border-radius: ${(props) => props.radius};
   :focus {
     outline: none;
-    border-bottom: 2px solid #90ee90;
+    /* border-bottom: 1px solid #cb9b8c; */
   }
 `;
 
@@ -91,10 +95,10 @@ const Textarea = styled.textarea`
   line-height: 1.5em;
   box-sizing: border-box;
   border: none;
-  border-bottom: 2px solid gray;
+  /* border-bottom: 1px solid gray; */
   :focus {
     outline: none;
-    border-bottom: 2px solid #90ee90;
+    /* border-bottom: 1px solid #cb9b8c; */
   }
 `;
 export default Input;
