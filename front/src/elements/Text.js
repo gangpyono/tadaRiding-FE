@@ -15,6 +15,7 @@ const Text = (props) => {
     </React.Fragment>
   );
 };
+
 Text.defaultProps = {
   children: null,
   size: "20px",
