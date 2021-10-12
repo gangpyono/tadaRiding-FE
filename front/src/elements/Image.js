@@ -16,14 +16,14 @@ const Image = (props) => {
   );
 };
 
-Text.defaultProps = {
+Image.defaultProps = {
   src: "https://aomori-cycling.com/kr/wp-content/themes/cycling/images/basi_img-road.jpg",
   size: 200,
 };
 
 const ImageOutter = styled.div`
   width: 100%;
-  min-width: 250px;
+  /* min-width: 250px; */
 `;
 const ImageInner = styled.div`
   position: relative;
