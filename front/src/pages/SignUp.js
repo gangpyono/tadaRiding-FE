@@ -64,20 +64,22 @@ const SignUp = () => {
           ></Input>
         </Grid>
 
-        <Grid isFlex width="250px" margin="40px auto">
+        <Grid isFlex width="70%" margin="40px auto">
           <Button
-            padding="10px 20px"
+            padding="10px"
+            width="40%"
             backgroundColor="#ffffee"
             _onClick={() => {}}
           >
             취소
           </Button>
           <Button
-            padding="10px 20px"
+            padding="10px"
+            width="40%"
             backgroundColor="#ffffee"
             _onClick={() => {}}
           >
-            가입완료
+            회원가입
           </Button>
         </Grid>
       </Grid>
