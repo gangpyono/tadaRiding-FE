@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const Button = (props) => {
   const {
@@ -45,13 +45,13 @@ const Button = (props) => {
 };
 
 Button.defaultProps = {
-  width: "100px",
-  margin: "",
-  padding: "5px",
-  borderRadius: "50px",
-  size: "",
-  color: "black",
-  backgroundColor: "#90EE90",
+  width: '100px',
+  margin: '',
+  padding: '5px',
+  borderRadius: '50px',
+  size: '',
+  color: 'black',
+  backgroundColor: '#90EE90',
   isFloat: false,
   children: null,
   _onClick: () => {},

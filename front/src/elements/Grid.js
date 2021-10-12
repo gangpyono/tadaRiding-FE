@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 const Grid = (props) => {
   const {
@@ -12,6 +12,9 @@ const Grid = (props) => {
     isFlex,
     borderRadius,
     border,
+    //수정사항
+    flexBasis,
+    wrap,
   } = props;
 
   const styles = {
@@ -24,6 +27,9 @@ const Grid = (props) => {
     isFlex,
     borderRadius,
     border,
+    //수정사항
+    flexBasis,
+    wrap,
   };
 
   return (
@@ -44,6 +50,9 @@ Grid.defaultProps = {
   isFlex: false,
   borderRadius: false,
   border: false,
+  //수정사항
+  wrap: false,
+  flexBasis: false,
 };
 
 const GridBox = styled.div`
@@ -61,6 +70,9 @@ const GridBox = styled.div`
   ${(props) => (props.center ? `text-align: center;` : '')}
   ${(props) => (props.borderRadius ? `border-radius : ${props.borderRadius};` : '')};
   ${(props) => (props.border ? `border : ${props.border};` : '')};
+  // 수정사항
+  ${(props) => (props.wrap ? `flex-wrap : wrap` : '')};
+  ${(props) => (props.flexBasis ? `flex-basis : ${props.flexBasis} ` : '')};
 `;
 
 export default Grid;
