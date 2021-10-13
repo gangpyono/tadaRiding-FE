@@ -1,9 +1,26 @@
 import React from "react";
-
 //elements
 import { Grid, Button, Input, Text } from "../elements/index";
+import { history } from "../redux/configureStore";
+// redux, action
+import { useDispatch } from "react-redux";
+import { actionCreators as userActions } from "../redux/modules/user";
 
 const Login = () => {
+  const dispatch = useDispatch();
+
+  const [id, setId] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const login = () => {
+    if (id === "" || password === "") {
+      window.alert("아이디 혹은 비밀번호를 입력해주세요 😊");
+      return;
+    }
+
+    dispatch(userActions.LoginDB({ userId: id, userPassword: password }));
+  };
+
   return (
     <>
       <Text margin="60px" size="2em" color="#849298" bold align="center">
@@ -23,6 +40,7 @@ const Login = () => {
             width="100%"
             radius="15px"
             placeholder="아이디를 입력하세요"
+            _onChange={(e) => setId(e.target.value)}
           ></Input>
         </Grid>
         <Grid width="77%" margin="0 auto">
@@ -32,6 +50,7 @@ const Login = () => {
             radius="15px"
             placeholder="비밀번호를 입력하세요"
             type="password"
+            _onChange={(e) => setPassword(e.target.value)}
           ></Input>
         </Grid>
 
@@ -41,7 +60,10 @@ const Login = () => {
             padding="10px"
             width="40%"
             backgroundColor="#ffffee"
-            _onClick={() => {}}
+            _onClick={() => {
+              login();
+              console.log("로그인했어!!!!!!!!!!");
+            }}
           >
             로그인
           </Button>
@@ -50,7 +72,9 @@ const Login = () => {
             padding="10px"
             width="40%"
             backgroundColor="#ffffee"
-            _onClick={() => {}}
+            _onClick={() => {
+              history.push("/signup");
+            }}
           >
             회원가입
           </Button>

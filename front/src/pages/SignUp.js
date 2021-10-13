@@ -3,9 +3,13 @@ import React from "react";
 import { Grid, Button, Input, Text } from "../elements/index";
 // store
 import { history } from "../redux/configureStore";
-// redux
-import 
+// redux, actions
+import { useDispatch } from "react-redux";
+import { actionCreators as userActions } from "../redux/modules/user";
+
 const SignUp = () => {
+  const dispatch = useDispatch();
+
   const [id, setId] = React.useState("");
   const [nickname, setNickname] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -24,6 +28,15 @@ const SignUp = () => {
       window.alert("비밀번호와 비밀번호 확인이 일치하지 않습니다 😅");
       return;
     }
+
+    dispatch(
+      userActions.SignUpDB({
+        userId: id,
+        userNickname: nickname,
+        userPassword: password,
+        userPhoneNumber: phoneNumber,
+      })
+    );
   };
 
   return (

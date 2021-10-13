@@ -1,14 +1,15 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "",
+  baseURL: "http://localhost:5000",
 });
 
 export const apis = {
-  getUser: () => instance.post("/api/users/register"),
-  setUser: (userInfo) => instance.post("/api/users/auth", userInfo),
+  signUp: (userInfo) => instance.post("/api/users/register", userInfo),
+  login: (userInfo) => instance.post("/api/users/auth", userInfo),
+  logout: () => instance.delete("/api/users/auth"),
 };
-
-instance.defaults.headers.common["Authorization"] = `Bearer ${USER_TOKEN}`;
+const USER_TOKEN = sessionStorage.getItem("USER_TOKEN");
+instance.defaults.headers.common["Authorization"] = USER_TOKEN;
 
 export default apis;
