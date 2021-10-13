@@ -13,7 +13,6 @@ const Button = (props) => {
     _onClick,
     isFloat,
     children,
-    //수정
     isShadow,
   } = props;
 
@@ -26,7 +25,6 @@ const Button = (props) => {
     color: color,
     backgroundColor: backgroundColor,
     isFloat: isFloat,
-    //수정
     isShadow: isShadow,
   };
 
@@ -61,7 +59,6 @@ Button.defaultProps = {
 
   children: null,
   _onClick: () => {},
-  //수정
   isShadow: false,
 };
 

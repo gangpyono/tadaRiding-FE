@@ -130,6 +130,8 @@ const PostDetail = (props) => {
             ></Input>
 
             <Button
+              isShadow
+              backgroundColor="#ffffee"
               padding="10px"
               margin="0px 0px 0px 10px"
               _onClick={() => {}}

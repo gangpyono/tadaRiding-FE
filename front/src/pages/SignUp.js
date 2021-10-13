@@ -66,6 +66,7 @@ const SignUp = () => {
 
         <Grid isFlex width="70%" margin="40px auto">
           <Button
+            isShadow
             padding="10px"
             width="40%"
             backgroundColor="#ffffee"
@@ -74,6 +75,7 @@ const SignUp = () => {
             취소
           </Button>
           <Button
+            isShadow
             padding="10px"
             width="40%"
             backgroundColor="#ffffee"

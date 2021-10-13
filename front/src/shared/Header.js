@@ -11,6 +11,7 @@ const Header = (props) => {
         </Text>
         <Grid isFlex>
           <Button
+            isShadow
             margin="0px 20px"
             padding="10px"
             backgroundColor="#ffffee"
@@ -35,6 +36,7 @@ const Header = (props) => {
   //       </Text>
   //       <Grid isFlex>
   //         <Button
+  //           isShadow
   //           margin="0px 20px"
   //           padding="10px"
   //           backgroundColor="#ffffee"

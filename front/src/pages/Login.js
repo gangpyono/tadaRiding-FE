@@ -37,6 +37,7 @@ const Login = () => {
 
         <Grid isFlex width="70%" margin="60px auto">
           <Button
+            isShadow
             padding="10px"
             width="40%"
             backgroundColor="#ffffee"
@@ -45,6 +46,7 @@ const Login = () => {
             로그인
           </Button>
           <Button
+            isShadow
             padding="10px"
             width="40%"
             backgroundColor="#ffffee"

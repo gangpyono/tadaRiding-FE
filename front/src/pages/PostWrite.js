@@ -96,11 +96,21 @@ const PostWrite = (props) => {
             _onChange={() => {}}
           ></Input>
         </Grid>
-        <Grid isFlex width="250px" margin="50px auto">
-          <Button padding="10px" _onClick={() => {}}>
+        <Grid isFlex width="300px" margin="50px auto">
+          <Button
+            isShadow
+            padding="10px"
+            backgroundColor="#ffffee"
+            _onClick={() => {}}
+          >
             확인
           </Button>
-          <Button padding="10px" _onClick={() => {}}>
+          <Button
+            isShadow
+            padding="10px"
+            backgroundColor="#ffffee"
+            _onClick={() => {}}
+          >
             취소
           </Button>
         </Grid>
