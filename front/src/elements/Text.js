@@ -1,20 +1,9 @@
-import { borderRadius } from "@mui/system";
 import React from "react";
 import styled from "styled-components";
 
 const Text = (props) => {
-  const {
-    size,
-    bold,
-    color,
-    align,
-    margin,
-    children,
-    width,
-    bg,
-    padding,
-    borderRadius,
-  } = props;
+  const { size, bold, color, align, margin, children, width, bg, padding, borderRadius } =
+    props;
   const styles = {
     size: size,
     bold: bold,
@@ -54,7 +43,6 @@ const ElText = styled.div`
   margin: ${(props) => props.margin};
   ${(props) => (props.bg ? `background-color : ${props.bg}` : "")};
   ${(props) => (props.padding ? `padding : ${props.padding}; ` : "")};
-  ${(props) =>
-    props.borderRadius ? `border-radius : ${props.borderRadius};` : ""};
+  ${(props) => (props.borderRadius ? `border-radius : ${props.borderRadius};` : "")};
 `;
 export default Text;
