@@ -1,9 +1,31 @@
 import React from "react";
-
 //elements
 import { Grid, Button, Input, Text } from "../elements/index";
-
+// store
+import { history } from "../redux/configureStore";
+// redux
+import 
 const SignUp = () => {
+  const [id, setId] = React.useState("");
+  const [nickname, setNickname] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [passwordCheck, setPasswordCheck] = React.useState("");
+  const [phoneNumber, setPhoneNumber] = React.useState("");
+
+  const signUp = () => {
+    if (id === "" || nickname === "" || password === "" || phoneNumber === "") {
+      window.alert(
+        "아이디, 닉네임, 비밀번호, 핸드폰번호를 모두 입력해주세요 😆!!"
+      );
+      return;
+    }
+
+    if (password !== passwordCheck) {
+      window.alert("비밀번호와 비밀번호 확인이 일치하지 않습니다 😅");
+      return;
+    }
+  };
+
   return (
     <>
       <Text margin="40px" size="2em" color="#849298" bold align="center">
@@ -23,6 +45,9 @@ const SignUp = () => {
             width="100%"
             radius="15px"
             placeholder="아이디를 입력하세요"
+            _onChange={(e) => {
+              setId(e.target.value);
+            }}
           ></Input>
         </Grid>
 
@@ -32,6 +57,9 @@ const SignUp = () => {
             width="100%"
             radius="15px"
             placeholder="닉네임을 입력하세요"
+            _onChange={(e) => {
+              setNickname(e.target.value);
+            }}
           ></Input>
         </Grid>
 
@@ -42,6 +70,9 @@ const SignUp = () => {
             radius="15px"
             type="password"
             placeholder="비밀번호를 입력하세요"
+            _onChange={(e) => {
+              setPassword(e.target.value);
+            }}
           ></Input>
         </Grid>
 
@@ -52,6 +83,9 @@ const SignUp = () => {
             radius="15px"
             type="password"
             placeholder="비밀번호를 한번 더 입력하세요"
+            _onChange={(e) => {
+              setPasswordCheck(e.target.value);
+            }}
           ></Input>
         </Grid>
 
@@ -61,6 +95,9 @@ const SignUp = () => {
             width="100%"
             radius="15px"
             placeholder="핸드폰번호를 입력하세요"
+            _onChange={(e) => {
+              setPhoneNumber(e.target.value);
+            }}
           ></Input>
         </Grid>
 
@@ -70,7 +107,9 @@ const SignUp = () => {
             padding="10px"
             width="40%"
             backgroundColor="#ffffee"
-            _onClick={() => {}}
+            _onClick={() => {
+              history.push("/");
+            }}
           >
             취소
           </Button>
@@ -79,7 +118,9 @@ const SignUp = () => {
             padding="10px"
             width="40%"
             backgroundColor="#ffffee"
-            _onClick={() => {}}
+            _onClick={() => {
+              signUp();
+            }}
           >
             회원가입
           </Button>

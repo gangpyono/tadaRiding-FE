@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid, Button, Text } from "../elements/index";
 
+import { history } from "../redux/configureStore";
 const Header = (props) => {
   // 로그인 안 했을 때 헤더
   return (
@@ -15,7 +16,9 @@ const Header = (props) => {
             margin="0px 20px"
             padding="10px"
             backgroundColor="#ffffee"
-            _onClick={() => {}}
+            _onClick={() => {
+              history.push("/login");
+            }}
           >
             로그인
           </Button>
@@ -23,7 +26,9 @@ const Header = (props) => {
             isShadow
             padding="10px"
             backgroundColor="#ffffee"
-            _onClick={() => {}}
+            _onClick={() => {
+              history.push("/signup");
+            }}
           >
             회원가입
           </Button>
