@@ -13,6 +13,8 @@ const Button = (props) => {
     _onClick,
     isFloat,
     children,
+    //수정
+    isShadow,
   } = props;
 
   const styles = {
@@ -23,6 +25,9 @@ const Button = (props) => {
     size: size,
     color: color,
     backgroundColor: backgroundColor,
+    isFloat: isFloat,
+    //수정
+    isShadow: isShadow,
   };
 
   if (isFloat) {
@@ -52,9 +57,12 @@ Button.defaultProps = {
   size: '',
   color: 'black',
   backgroundColor: '#90EE90',
-  isFloat: false,
+  isFloat: '',
+
   children: null,
   _onClick: () => {},
+  //수정
+  isShadow: false,
 };
 
 const ElButton = styled.button`
@@ -68,12 +76,16 @@ const ElButton = styled.button`
   color: ${(props) => props.color};
   background-color: ${(props) => props.backgroundColor};
   cursor: pointer;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.12);
+  /* box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.12); */
+  ${(props) =>
+    props.isShadow
+      ? `box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.12);`
+      : ''}
 `;
 
 const FloatButton = styled.button`
-  position: fixed;
-  right: 50px;
+  position: ${(props) => props.isFloat};
+  right: 30px;
   bottom: 50px;
   width: 50px;
   height: 50px;

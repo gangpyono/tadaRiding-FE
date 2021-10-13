@@ -1,7 +1,7 @@
 import React from 'react';
 import Post from '../components/Post';
 
-import { Grid } from '../elements/index.js';
+import { Grid, Button } from '../elements/index.js';
 
 const PostList = (props) => {
   const list = [
@@ -41,7 +41,7 @@ const PostList = (props) => {
       period: '',
       content: '',
       likeCnt: 10,
-      likeState: false,
+
       date: '2021.10.11',
     },
     {
@@ -113,10 +113,14 @@ const PostList = (props) => {
 
   return (
     <>
-      <Grid isFlex width="1300px" margin="auto" wrap>
+      <Grid mainFlex width="1300px" margin=" 100px auto 0px" wrap>
         {list.map((p) => {
-          return <Post />;
+          return <Post basis="30%" />;
         })}
+
+        <Button isFloat="fixed" size="30px">
+          +
+        </Button>
       </Grid>
     </>
   );
