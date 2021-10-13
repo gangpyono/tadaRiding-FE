@@ -22,7 +22,7 @@ const PostDetail = (props) => {
           bg="#e1f5fe"
           isShadow
         >
-          <Text size="2em" bold margin="20px 0px 0px 20px">
+          <Text size="2em" bold margin="20px 0px 0px 20px" color="#727e82">
             제목
           </Text>
 
@@ -33,7 +33,7 @@ const PostDetail = (props) => {
             {/* <Button padding="10px">참석</Button> */}
             <Grid width="350px">
               <Grid isFlex padding="10px 0px" width="100%" margin="0 auto">
-                <Text size="1em" bold>
+                <Text size="1em" bold color="#727e82">
                   인원수
                 </Text>
                 <Text
@@ -42,13 +42,13 @@ const PostDetail = (props) => {
                   borderRadius="10px"
                   width="250px"
                   size="1em"
-                  bold
+                  // bold
                 >
                   1/4
                 </Text>
               </Grid>
               <Grid isFlex padding="10px 0px" width="100%" margin="0 auto">
-                <Text size="1em" bold>
+                <Text size="1em" bold color="#727e82">
                   출발
                 </Text>
                 <Text
@@ -57,13 +57,13 @@ const PostDetail = (props) => {
                   borderRadius="10px"
                   width="250px"
                   size="1em"
-                  bold
+                  // bold
                 >
                   강북
                 </Text>
               </Grid>
               <Grid isFlex padding="10px 0px" width="100%" margin="0 auto">
-                <Text size="1em" bold>
+                <Text size="1em" bold color="#727e82">
                   도착
                 </Text>
                 <Text
@@ -72,13 +72,13 @@ const PostDetail = (props) => {
                   borderRadius="10px"
                   width="250px"
                   size="1em"
-                  bold
+                  // bold
                 >
                   강북
                 </Text>
               </Grid>
               <Grid isFlex padding="10px 0px" width="100%" margin="0 auto">
-                <Text size="1em" bold>
+                <Text size="1em" bold color="#727e82">
                   주행기간
                 </Text>
                 <Text
@@ -87,7 +87,7 @@ const PostDetail = (props) => {
                   borderRadius="10px"
                   width="250px"
                   size="1em"
-                  bold
+                  // bold
                 >
                   2021-10-08
                 </Text>
@@ -96,7 +96,7 @@ const PostDetail = (props) => {
           </Grid>
 
           <Grid width="100%">
-            <Text padding="10px 0px" size="1em" bold>
+            <Text padding="10px 0px" size="1em" bold color="#727e82">
               내용
             </Text>
             <Text
@@ -105,7 +105,7 @@ const PostDetail = (props) => {
               borderRadius="10px"
               width="100%"
               size="1em"
-              bold
+              // bold
             >
               날도좋은데 라이딩어때요?날도좋은데 라이딩어때요?날도좋은데
               라이딩어때요?날도좋은데 라이딩어때요?날도좋은데 라이딩어때요?
@@ -115,7 +115,7 @@ const PostDetail = (props) => {
               라이딩어때요?날도좋은데 라이딩어때요?날도좋은데 라이딩어때요?
             </Text>
           </Grid>
-          <Text padding="16px 0px" size="1em" bold>
+          <Text padding="16px 0px" size="1em" bold color="#727e82">
             댓글
           </Text>
           <Grid isFlex width="100%" margin="0 auto">

@@ -19,7 +19,12 @@ const Header = (props) => {
           >
             로그인
           </Button>
-          <Button padding="10px" backgroundColor="#ffffee" _onClick={() => {}}>
+          <Button
+            isShadow
+            padding="10px"
+            backgroundColor="#ffffee"
+            _onClick={() => {}}
+          >
             회원가입
           </Button>
         </Grid>

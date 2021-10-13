@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
-import { Grid, Button, Text, Image } from '../elements/index.js';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { Grid, Button, Text, Image } from "../elements/index.js";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const Post = (props) => {
   return (
@@ -17,7 +17,7 @@ const Post = (props) => {
       borderRadius="10px"
       isPosition="relative"
     >
-      <Text align="center" margin="20px">
+      <Text align="center" margin="20px" bold color="#727e82">
         동료 모집합니다.
       </Text>
 
@@ -33,7 +33,7 @@ const Post = (props) => {
       <Grid margin="0px 20px 20px 20px">
         <Image></Image>
       </Grid>
-      <Text> 강남 → 강북</Text>
+      <Text bold> 강남 → 강북</Text>
 
       <Grid padding="14px">
         <Grid isFlex padding="10px">
