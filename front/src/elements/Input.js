@@ -37,7 +37,7 @@ const Input = (props) => {
           label={label}
           placeholder={placeholder}
           enterSubmit={enterSubmit}
-          _onChange={_onChange}
+          onChange={_onChange}
         />
       </>
     );
@@ -52,7 +52,7 @@ const Input = (props) => {
         type={type}
         placeholder={placeholder}
         enterSubmit={enterSubmit}
-        _onChange={_onChange}
+        onChange={_onChange}
       />
     </>
   );
