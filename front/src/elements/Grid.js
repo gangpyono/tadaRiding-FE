@@ -14,6 +14,7 @@ const Grid = (props) => {
     borderRadius,
     border,
     isShadow,
+    flexEnd,
   } = props;
 
   const styles = {
@@ -27,6 +28,7 @@ const Grid = (props) => {
     borderRadius,
     border,
     isShadow,
+    flexEnd,
   };
 
   return (
@@ -48,6 +50,7 @@ Grid.defaultProps = {
   borderRadius: false,
   border: false,
   isShadow: false,
+  flexEnd: false,
 };
 
 const GridBox = styled.div`
@@ -70,6 +73,8 @@ const GridBox = styled.div`
     props.isShadow
       ? `box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.12);`
       : ""};
+  ${(props) =>
+    props.flexEnd ? `display : flex; justify-content: flex-end;` : ""};
 `;
 
 export default Grid;

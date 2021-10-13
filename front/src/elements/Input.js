@@ -95,6 +95,7 @@ const Textarea = styled.textarea`
   line-height: 1.5em;
   box-sizing: border-box;
   border: none;
+  resize: none;
   /* border-bottom: 1px solid gray; */
   :focus {
     outline: none;
