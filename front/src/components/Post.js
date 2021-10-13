@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
-import { Grid, Button, Text, Image } from '../elements/index.js';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { Grid, Button, Text, Image } from "../elements/index.js";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const Post = (props) => {
   return (
@@ -40,17 +40,19 @@ const Post = (props) => {
           <Text size="15px">출발일 : 2021.10.1</Text>
           <Text size="15px">인원수 : 5/10</Text>
           <Grid isFlex padding="10px">
-            <Text size="15px" margin=" 10px">
-              1
-            </Text>
-            <Button
-              width="12px"
-              backgroundColor="transparent"
-              borderRadius="0px"
-              padding="0px"
-            >
-              <FavoriteBorderIcon />
-            </Button>
+            <Grid isFlex>
+              <Text size="15px" margin=" 10px">
+                1
+              </Text>
+              <Button
+                width="12px"
+                backgroundColor="transparent"
+                borderRadius="0px"
+                padding="0px"
+              >
+                <FavoriteBorderIcon />
+              </Button>
+            </Grid>
           </Grid>
         </Grid>
 
