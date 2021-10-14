@@ -118,7 +118,7 @@ const PostList = (props) => {
           return <Post basis="30%" />;
         })}
 
-        <Button isFloat="fixed" size="30px" backgroundColor="#4ba3c7">
+        <Button isShadow isFloat="fixed" size="30px" backgroundColor="#4ba3c7">
           +
         </Button>
       </Grid>

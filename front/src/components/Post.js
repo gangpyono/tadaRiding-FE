@@ -21,11 +21,11 @@ const Post = (props) => {
         동료 모집합니다.
       </Text>
 
-      <Grid isPosition="absolute" top="5px" right="5px">
-        <Button borderRadius="15px" backgroundColor="transparent" width="30px">
+      <Grid isPosition="absolute" top="11px" right="10px">
+        <Button backgroundColor="transparent" width="30px">
           <EditIcon />
         </Button>
-        <Button borderRadius="15px" backgroundColor="transparent" width="30px">
+        <Button backgroundColor="transparent" width="30px">
           <DeleteIcon />
         </Button>
       </Grid>
@@ -40,7 +40,7 @@ const Post = (props) => {
           <Text size="15px">출발일 : 2021.10.1</Text>
           <Text size="15px">인원수 : 5/10</Text>
           <Grid isFlex padding="10px">
-            <Text size="15px" margin=" 10px">
+            <Text size="15px" margin="10px">
               1
             </Text>
             <Button
