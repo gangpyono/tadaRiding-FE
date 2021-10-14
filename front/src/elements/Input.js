@@ -14,6 +14,7 @@ const Input = (props) => {
     label,
     multiLine,
     type,
+    value,
     placeholder,
     enterSubmit,
     _onChange,
@@ -37,7 +38,8 @@ const Input = (props) => {
           label={label}
           placeholder={placeholder}
           enterSubmit={enterSubmit}
-          _onChange={_onChange}
+          onChange={_onChange}
+          value={value}
         />
       </>
     );
@@ -52,7 +54,8 @@ const Input = (props) => {
         type={type}
         placeholder={placeholder}
         enterSubmit={enterSubmit}
-        _onChange={_onChange}
+        onChange={_onChange}
+        value={value}
       />
     </>
   );
@@ -66,6 +69,7 @@ Input.defaultProps = {
   radius: "",
   label: "",
   type: "text",
+  value: "",
   multiLine: false,
   placeholder: "텍스트를 입력하세요",
   enterSubmit: () => {},

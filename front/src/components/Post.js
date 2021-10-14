@@ -17,7 +17,7 @@ const Post = (props) => {
       borderRadius="10px"
       isPosition="relative"
     >
-      <Text align="center" margin="20px">
+      <Text align="center" margin="20px" bold color="#727e82">
         동료 모집합니다.
       </Text>
 
@@ -33,7 +33,7 @@ const Post = (props) => {
       <Grid margin="0px 20px 20px 20px">
         <Image></Image>
       </Grid>
-      <Text> 강남 → 강북</Text>
+      <Text bold> 강남 → 강북</Text>
 
       <Grid padding="14px">
         <Grid isFlex padding="10px">

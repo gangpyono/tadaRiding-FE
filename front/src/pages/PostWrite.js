@@ -6,19 +6,19 @@ import TextField from "@mui/material/TextField";
 const PostWrite = (props) => {
   return (
     <React.Fragment>
-      <Text width margin="80px" size="2em" bold align="center">
+      <Text color="#727e82" margin="70px" size="2em" bold align="center">
         게시물작성
       </Text>
       <Grid
         width="800px"
-        margin="100px auto"
+        margin="0px auto"
         padding="16px"
         borderRadius="15px"
         bg="#e1f5fe"
         isShadow
       >
         <Grid isFlex padding="25px 0px" width="77%" margin="0 auto">
-          <Text size="1em" bold>
+          <Text color="#727e82" size="1em" bold>
             제목
           </Text>
           <Input
@@ -29,7 +29,7 @@ const PostWrite = (props) => {
           ></Input>
         </Grid>
         <Grid isFlex padding="25px 0px" width="77%" margin="0 auto">
-          <Text size="1em" bold>
+          <Text color="#727e82" size="1em" bold>
             인원수
           </Text>
           <Input
@@ -41,7 +41,7 @@ const PostWrite = (props) => {
           ></Input>
         </Grid>
         <Grid isFlex padding="25px 0px" width="77%" margin="0 auto">
-          <Text size="1em" bold>
+          <Text color="#727e82" size="1em" bold>
             출발
           </Text>
           <Input
@@ -53,7 +53,7 @@ const PostWrite = (props) => {
           ></Input>
         </Grid>
         <Grid isFlex padding="25px 0px" width="77%" margin="0 auto">
-          <Text size="1em" bold>
+          <Text color="#727e82" size="1em" bold>
             도착
           </Text>
           <Input
@@ -65,13 +65,13 @@ const PostWrite = (props) => {
           ></Input>
         </Grid>
         <Grid isFlex padding="25px 0px" width="77%" margin="0 auto">
-          <Text size="1em" bold>
+          <Text color="#727e82" size="1em" bold>
             사진
           </Text>
           <Input type="file" padding="10px" width="80%" radius="15px"></Input>
         </Grid>
         <Grid isFlex padding="25px 0px" width="77%" margin="0 auto">
-          <Text size="1em" bold>
+          <Text color="#727e82" size="1em" bold>
             출발시간
           </Text>
           <TextField
@@ -84,7 +84,7 @@ const PostWrite = (props) => {
           />
         </Grid>
         <Grid isFlex padding="25px 0px" width="77%" margin="0 auto">
-          <Text size="1em" bold>
+          <Text color="#727e82" size="1em" bold>
             내용
           </Text>
           <Input

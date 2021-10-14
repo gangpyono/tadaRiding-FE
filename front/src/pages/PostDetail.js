@@ -8,8 +8,12 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useSelector } from "react-redux";
 
 const PostDetail = (props) => {
+  console.log(props.match.params.id);
+  const id = props.match.params.id;
+
   return (
     <React.Fragment>
       {/* <Text margin="80px" size="2em" bold align="center">
@@ -74,7 +78,7 @@ const PostDetail = (props) => {
 
             <Grid width="350px">
               <Grid isFlex padding="10px 0px" width="100%" margin="0 auto">
-                <Text size="1em" bold>
+                <Text size="1em" bold color="#727e82">
                   인원수
                 </Text>
                 <Text
@@ -90,7 +94,7 @@ const PostDetail = (props) => {
                 </Text>
               </Grid>
               <Grid isFlex padding="10px 0px" width="100%" margin="0 auto">
-                <Text size="1em" bold>
+                <Text size="1em" bold color="#727e82">
                   출발
                 </Text>
                 <Text
@@ -106,7 +110,7 @@ const PostDetail = (props) => {
                 </Text>
               </Grid>
               <Grid isFlex padding="10px 0px" width="100%" margin="0 auto">
-                <Text size="1em" bold>
+                <Text size="1em" bold color="#727e82">
                   도착
                 </Text>
                 <Text
@@ -141,7 +145,7 @@ const PostDetail = (props) => {
           </Grid>
 
           <Grid width="100%">
-            <Text padding="10px 0px" size="1em" bold>
+            <Text padding="10px 0px" size="1em" bold color="#727e82">
               내용
             </Text>
             <Text
@@ -150,7 +154,7 @@ const PostDetail = (props) => {
               borderRadius="10px"
               width="100%"
               size="1em"
-              bold
+              // bold
             >
               날도좋은데 라이딩어때요?날도좋은데 라이딩어때요?날도좋은데
               라이딩어때요?날도좋은데 라이딩어때요?날도좋은데 라이딩어때요?
@@ -161,9 +165,9 @@ const PostDetail = (props) => {
             </Text>
           </Grid>
 
-          <CommentWrite />
+          <CommentWrite postUid={id} />
         </Grid>
-        <CommentList />
+        <CommentList postUid={id} />
       </Grid>
     </React.Fragment>
   );
