@@ -1,7 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 // axios module
-import apis from "../../shared/apis";
+import apis from "../../lib/apis";
 
 // actions
 const SET_USER = "SET_USER";
@@ -33,8 +33,12 @@ const SignUpDB = (userInfo) => {
     apis
       .signUp(userInfo)
       .then((res) => {
+        if (res.data.msg === "성공적으로 회원 가입이 완료 되었습니다.") {
+          window.alert(res.data.msg);
+          history.push("/");
+          return;
+        }
         window.alert(res.data.msg);
-        history.push("/");
       })
       .catch((error) => {
         console.log(error);
@@ -48,8 +52,6 @@ const LoginDB = (userInfo) => {
     apis
       .login(userInfo)
       .then((res) => {
-        console.log(res);
-
         const USER_TOKEN = res.data.token;
 
         sessionStorage.setItem("USER_TOKEN", USER_TOKEN);
@@ -59,7 +61,7 @@ const LoginDB = (userInfo) => {
       })
       .then(() => {
         window.alert("성공적으로 로그인되었습니다. 😆");
-        // history.push("/");
+        history.push("/");
       })
       .catch(() => window.alert("로그인 정보가 존재하지 않습니다!"));
   };
@@ -69,9 +71,28 @@ const LogOut = () => {
   return function (dispatch, getState, { history }) {
     sessionStorage.removeItem("USER_TOKEN");
 
-    dispatch(logOut()).then(() => {
-      window.alert("로그아웃 되었습니다!");
-      history.push("/");
+    dispatch(logOut());
+    window.alert("로그아웃 되었습니다!");
+    history.replace("/");
+  };
+};
+
+const LoginCheckDB = () => {
+  return function (dispatch) {
+    apis.loginCheck().then((res) => {
+      console.log(res);
+
+      if (res.data.success === true) {
+        console.log(res);
+        dispatch(
+          setUser({
+            userNickname: res.data.userNickname,
+            userUid: res.data.userUid,
+          })
+        );
+      } else {
+        dispatch(logOut());
+      }
     });
   };
 };
@@ -98,6 +119,7 @@ const actionCreators = {
   SignUpDB,
   LoginDB,
   LogOut,
+  LoginCheckDB,
 };
 
 export { actionCreators };
