@@ -102,9 +102,9 @@ const GridBox = styled.div`
       : ""};
   ${(props) =>
     props.flexEnd ? `display : flex; justify-content: flex-end;` : ""};
-
   ${(props) =>
     props.mainFlex ? `display : flex; align-items : center ;` : ""};
+
   ${(props) => (props.isPosition ? `position : ${props.isPosition}` : "")};
   ${(props) => (props.top ? `top : ${props.top}` : "")};
   ${(props) => (props.right ? `right : ${props.right}` : "")};

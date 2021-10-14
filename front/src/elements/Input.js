@@ -18,6 +18,7 @@ const Input = (props) => {
     placeholder,
     enterSubmit,
     _onChange,
+    defaultValue,
   } = props;
 
   const styles = {
@@ -26,6 +27,7 @@ const Input = (props) => {
     margin: margin,
     padding: padding,
     radius: radius,
+    defaultValue: defaultValue,
   };
 
   if (multiLine) {
@@ -40,6 +42,7 @@ const Input = (props) => {
           enterSubmit={enterSubmit}
           onChange={_onChange}
           value={value}
+          defaultValue={defaultValue ? defaultValue : null}
         />
       </>
     );
@@ -56,6 +59,7 @@ const Input = (props) => {
         enterSubmit={enterSubmit}
         onChange={_onChange}
         value={value}
+        defaultValue={defaultValue ? defaultValue : null}
       />
     </>
   );

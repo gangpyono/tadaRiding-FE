@@ -4,7 +4,6 @@ import { Grid, Input, Text, Button } from "../elements/index";
 import { actionCreators as cmtAction } from "../redux/modules/user";
 
 const CommentWrite = () => {
-  let [title, setTitle] = React.useState([]);
   const [comment, setcomment] = React.useState("");
   const onChangeComment = (e) => {
     setcomment(e.target.value);

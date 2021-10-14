@@ -15,6 +15,7 @@ import moment from "moment";
 const CommentList = (props) => {
   const dispatch = useDispatch();
   const comment_list = useSelector((state) => state.comment.list);
+  console.log(comment_list);
   // const product_list = useSelector((state) => state.product.product_list);
 
   console.log(comment_list);
@@ -22,11 +23,11 @@ const CommentList = (props) => {
 
   const createAt = moment().format("YYYY-MM-DD"); //작성된 시점의 시간을 보냄
 
-  React.useEffect(() => {
-    if (!comment_list[post_id]) {
-      dispatch(cmtActions.getCommentDB(post_id));
-    }
-  }, []);
+  // React.useEffect(() => {
+  //   if (!comment_list[post_id]) {
+  //     dispatch(cmtActions.getCommentDB(post_id));
+  //   }
+  // }, []);
 
   // if (!comment_list[postUid] || postUid) {
   //   return null;

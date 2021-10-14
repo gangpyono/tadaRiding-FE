@@ -28,7 +28,8 @@ function App() {
           <Route path="/Mypage" exact component={MyPage} />
           <Route path="/" exact component={PostList} />
           <Route path="/PostWrite" exact component={PostWrite} />
-          <Route path="/PostDetail/:postUid" exact component={PostDetail} />
+          <Route path="/PostWrite/:postUid" exact component={PostWrite} />
+          <Route path="/PostDetail" exact component={PostDetail} />
         </ConnectedRouter>
       </Grid>
     </>
