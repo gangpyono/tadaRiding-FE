@@ -2,8 +2,22 @@ import React from "react";
 import styled from "styled-components";
 
 const Text = (props) => {
-  const { size, bold, color, align, margin, children, width, bg, padding, borderRadius } =
-    props;
+  const {
+    size,
+    bold,
+    color,
+    align,
+    margin,
+    children,
+    width,
+    bg,
+    padding,
+    borderRadius,
+    _onChange,
+    _onClick,
+    cursor,
+  } = props;
+
   const styles = {
     size: size,
     bold: bold,
@@ -14,10 +28,14 @@ const Text = (props) => {
     bg: bg,
     padding: padding,
     borderRadius: borderRadius,
+    cursor: cursor,
   };
+
   return (
     <React.Fragment>
-      <ElText {...styles}>{children}</ElText>
+      <ElText onClick={_onClick} onChange={_onChange} {...styles}>
+        {children}
+      </ElText>
     </React.Fragment>
   );
 };
@@ -32,6 +50,9 @@ Text.defaultProps = {
   bg: false,
   padding: false,
   borderRadius: false,
+  _onChange: () => {},
+  _onClick: () => {},
+  cursor: false,
 };
 
 const ElText = styled.div`
@@ -43,6 +64,8 @@ const ElText = styled.div`
   margin: ${(props) => props.margin};
   ${(props) => (props.bg ? `background-color : ${props.bg}` : "")};
   ${(props) => (props.padding ? `padding : ${props.padding}; ` : "")};
-  ${(props) => (props.borderRadius ? `border-radius : ${props.borderRadius};` : "")};
+  ${(props) =>
+    props.borderRadius ? `border-radius : ${props.borderRadius};` : ""};
+  ${(props) => (props.cursor ? `cursor:pointer` : "")}
 `;
 export default Text;

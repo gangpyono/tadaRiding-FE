@@ -21,6 +21,8 @@ const Grid = (props) => {
     isPosition,
     top,
     right,
+    maxWidth,
+    minWidth,
   } = props;
 
   const styles = {
@@ -42,6 +44,8 @@ const Grid = (props) => {
     isPosition,
     top,
     right,
+    maxWidth,
+    minWidth,
   };
 
   return (
@@ -55,6 +59,8 @@ Grid.defaultProps = {
   children: null,
   width: false,
   height: false,
+  maxWidth: "",
+  minWidth: "",
   padding: false,
   margin: false,
   bg: false,
@@ -76,6 +82,8 @@ Grid.defaultProps = {
 const GridBox = styled.div`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
+  max-width: ${(props) => props.maxWidth};
+  min-width: ${(props) => props.minWidth};
   box-sizing: border-box;
   ${(props) => (props.padding ? `padding : ${props.padding}; ` : "")};
   ${(props) => (props.margin ? `margin : ${props.margin}; ` : "")};
@@ -86,21 +94,25 @@ const GridBox = styled.div`
       : ""};
 
   ${(props) => (props.center ? `text-align: center;` : "")}
-  ${(props) => (props.borderRadius ? `border-radius : ${props.borderRadius};` : "")};
+  ${(props) =>
+    props.borderRadius ? `border-radius : ${props.borderRadius};` : ""};
   ${(props) => (props.border ? `border : ${props.border};` : "")};
   // 수정사항
   ${(props) => (props.wrap ? `flex-wrap : wrap` : "")};
   ${(props) => (props.flexBasis ? `flex-basis : 30% ` : "")};
   ${(props) => (props.center ? `text-align: center;` : "")}
-  ${(props) => (props.borderRadius ? `border-radius : ${props.borderRadius};` : "")};
+  ${(props) =>
+    props.borderRadius ? `border-radius : ${props.borderRadius};` : ""};
   ${(props) => (props.border ? `border : ${props.border};` : "")};
   ${(props) =>
     props.isShadow
       ? `box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.12);`
       : ""};
-  ${(props) => (props.flexEnd ? `display : flex; justify-content: flex-end;` : "")};
+  ${(props) =>
+    props.flexEnd ? `display : flex; justify-content: flex-end;` : ""};
 
-  ${(props) => (props.mainFlex ? `display : flex; align-items : center ;` : "")};
+  ${(props) =>
+    props.mainFlex ? `display : flex; align-items : center ;` : ""};
   ${(props) => (props.isPosition ? `position : ${props.isPosition}` : "")};
   ${(props) => (props.top ? `top : ${props.top}` : "")};
   ${(props) => (props.right ? `right : ${props.right}` : "")};
