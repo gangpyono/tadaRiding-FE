@@ -17,6 +17,7 @@ const Input = (props) => {
     placeholder,
     enterSubmit,
     _onChange,
+    defaultValue,
   } = props;
 
   const styles = {
@@ -25,6 +26,7 @@ const Input = (props) => {
     margin: margin,
     padding: padding,
     radius: radius,
+    defaultValue: defaultValue,
   };
 
   if (multiLine) {
@@ -37,7 +39,8 @@ const Input = (props) => {
           label={label}
           placeholder={placeholder}
           enterSubmit={enterSubmit}
-          _onChange={_onChange}
+          onChange={_onChange}
+          defaultValue={defaultValue ? defaultValue : null}
         />
       </>
     );
@@ -52,7 +55,8 @@ const Input = (props) => {
         type={type}
         placeholder={placeholder}
         enterSubmit={enterSubmit}
-        _onChange={_onChange}
+        onChange={_onChange}
+        defaultValue={defaultValue ? defaultValue : null}
       />
     </>
   );
@@ -70,6 +74,7 @@ Input.defaultProps = {
   placeholder: "텍스트를 입력하세요",
   enterSubmit: () => {},
   _onChange: () => {},
+  value: false,
 };
 
 const ElInput = styled.input`

@@ -1,126 +1,37 @@
 import React from "react";
 import Post from "../components/Post";
+import { useSelector } from "react-redux";
 
 import { Grid, Button } from "../elements/index.js";
 
 const PostList = (props) => {
-  const list = [
-    {
-      userID: "gangpyo",
-      title: "동료 모집합니다.",
-      maxPeople: 10,
-      start: "강남",
-      arrive: "경북",
-      photoURL: "",
-      period: "",
-      content: "",
-      likeCnt: 10,
-      likeState: false,
-      date: "2021.10.11",
-    },
-    {
-      userID: "gangpyo",
-      title: "동료 모집합니다.",
-      maxPeople: 10,
-      start: "강남",
-      arrive: "경북",
-      photoURL: "",
-      period: "",
-      content: "",
-      likeCnt: 10,
-      likeState: false,
-      date: "2021.10.11",
-    },
-    {
-      userID: "gangpyo",
-      title: "동료 모집합니다.",
-      maxPeople: 10,
-      start: "강남",
-      arrive: "경북",
-      photoURL: "",
-      period: "",
-      content: "",
-      likeCnt: 10,
-
-      date: "2021.10.11",
-    },
-    {
-      userID: "gangpyo",
-      title: "동료 모집합니다.",
-      maxPeople: 10,
-      start: "강남",
-      arrive: "경북",
-      photoURL: "",
-      period: "",
-      content: "",
-      likeCnt: 10,
-      likeState: false,
-      date: "2021.10.11",
-    },
-    {
-      userID: "gangpyo",
-      title: "동료 모집합니다.",
-      maxPeople: 10,
-      start: "강남",
-      arrive: "경북",
-      photoURL: "",
-      period: "",
-      content: "",
-      likeCnt: 10,
-      likeState: false,
-      date: "2021.10.11",
-    },
-    {
-      userID: "gangpyo",
-      title: "동료 모집합니다.",
-      maxPeople: 10,
-      start: "강남",
-      arrive: "경북",
-      photoURL: "",
-      period: "",
-      content: "",
-      likeCnt: 10,
-      likeState: false,
-      date: "2021.10.11",
-    },
-    {
-      userID: "gangpyo",
-      title: "동료 모집합니다.",
-      maxPeople: 10,
-      start: "강남",
-      arrive: "경북",
-      photoURL: "",
-      period: "",
-      content: "",
-      likeCnt: 10,
-      likeState: false,
-      date: "2021.10.11",
-    },
-    {
-      userID: "gangpyo",
-      title: "동료 모집합니다.",
-      maxPeople: 10,
-      start: "강남",
-      arrive: "경북",
-      photoURL: "",
-      period: "",
-      content: "",
-      likeCnt: 10,
-      likeState: false,
-      date: "2021.10.11",
-    },
-  ];
+  const { history } = props;
+  const list = useSelector((state) => state.post.list);
 
   return (
     <>
       <Grid mainFlex width="1300px" margin=" 100px auto 0px" wrap>
         {list.map((p) => {
-          return <Post basis="30%" />;
+          // if (p.postRegister === userUid) {
+          //   return <Post key={p.postUid} {...p} basis="30%" isMe />;
+          // } else {
+          //   return <Post key={p.postUid} {...p} basis="30%" />;
+          // }
+          return <Post key={p.postUid} {...p} basis="30%" isMe />;
         })}
 
-        <Button isFloat="fixed" size="30px" backgroundColor="#4ba3c7">
+        {/* permit */}
+        <Button
+          isFloat="fixed"
+          size="30px"
+          backgroundColor="#4ba3c7"
+          _onClick={() => {
+            history.push("/PostWrite");
+          }}
+        >
           +
         </Button>
+        {/* permit */}
       </Grid>
     </>
   );

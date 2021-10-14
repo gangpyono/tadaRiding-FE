@@ -31,7 +31,7 @@ const Button = (props) => {
   if (isFloat) {
     return (
       <>
-        <FloatButton {...styles} _onClick={_onClick}>
+        <FloatButton {...styles} onClick={_onClick}>
           {children}
         </FloatButton>
       </>
@@ -40,7 +40,7 @@ const Button = (props) => {
 
   return (
     <>
-      <ElButton {...styles} _onClick={_onClick}>
+      <ElButton {...styles} onClick={_onClick}>
         {children}
       </ElButton>
     </>

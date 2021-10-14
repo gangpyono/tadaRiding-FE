@@ -99,8 +99,8 @@ const GridBox = styled.div`
       ? `box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.12);`
       : ""};
   ${(props) => (props.flexEnd ? `display : flex; justify-content: flex-end;` : "")};
-
   ${(props) => (props.mainFlex ? `display : flex; align-items : center ;` : "")};
+
   ${(props) => (props.isPosition ? `position : ${props.isPosition}` : "")};
   ${(props) => (props.top ? `top : ${props.top}` : "")};
   ${(props) => (props.right ? `right : ${props.right}` : "")};
