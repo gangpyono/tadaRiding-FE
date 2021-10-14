@@ -1,8 +1,13 @@
 import React from "react";
 import { Grid, Text, Input, Button, Image } from "../elements/index";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const PostDetail = (props) => {
+  const _postUid = props.match.params.postUid;
+  const postList = useSelector((state) => state.post.list);
+  const post = postList.find((p) => p.postUid === _postUid);
+
   return (
     <React.Fragment>
       {/* <Text margin="80px" size="2em" bold align="center">
@@ -15,20 +20,14 @@ const PostDetail = (props) => {
           <Button padding="10px">1:좋아요</Button>
         </Grid>
 
-        <Grid
-          width="100%"
-          padding="55px"
-          borderRadius="15px"
-          bg="#e1f5fe"
-          isShadow
-        >
+        <Grid width="100%" padding="55px" borderRadius="15px" bg="#e1f5fe" isShadow>
           <Text size="2em" bold margin="20px 0px 0px 20px" color="#727e82">
-            제목
+            {post.postTitle}
           </Text>
 
           <Grid isFlex>
             <Grid width="300px">
-              <Image src={props.src}></Image>
+              <Image src={post.postImage}></Image>
             </Grid>
             {/* <Button padding="10px">참석</Button> */}
             <Grid width="350px">
@@ -44,7 +43,7 @@ const PostDetail = (props) => {
                   size="1em"
                   // bold
                 >
-                  1/4
+                  {post.participants.length}/{post.limitedUserNum}
                 </Text>
               </Grid>
               <Grid isFlex padding="10px 0px" width="100%" margin="0 auto">
@@ -59,7 +58,7 @@ const PostDetail = (props) => {
                   size="1em"
                   // bold
                 >
-                  강북
+                  {post.origin}
                 </Text>
               </Grid>
               <Grid isFlex padding="10px 0px" width="100%" margin="0 auto">
@@ -74,7 +73,7 @@ const PostDetail = (props) => {
                   size="1em"
                   // bold
                 >
-                  강북
+                  {post.destination}
                 </Text>
               </Grid>
               <Grid isFlex padding="10px 0px" width="100%" margin="0 auto">
@@ -89,7 +88,7 @@ const PostDetail = (props) => {
                   size="1em"
                   // bold
                 >
-                  2021-10-08
+                  {post.startTime}
                 </Text>
               </Grid>
             </Grid>
@@ -107,12 +106,7 @@ const PostDetail = (props) => {
               size="1em"
               // bold
             >
-              날도좋은데 라이딩어때요?날도좋은데 라이딩어때요?날도좋은데
-              라이딩어때요?날도좋은데 라이딩어때요?날도좋은데 라이딩어때요?
-              날도좋은데 라이딩어때요?날도좋은데 라이딩어때요?날도좋은데
-              라이딩어때요?날도좋은데 라이딩어때요?날도좋은데 라이딩어때요?
-              날도좋은데 라이딩어때요?날도좋은데 라이딩어때요?날도좋은데
-              라이딩어때요?날도좋은데 라이딩어때요?날도좋은데 라이딩어때요?
+              {post.postDesc}
             </Text>
           </Grid>
           <Text padding="16px 0px" size="1em" bold color="#727e82">
@@ -141,6 +135,7 @@ const PostDetail = (props) => {
           </Grid>
         </Grid>
 
+        {/* 댓글 */}
         <Grid width="100%" padding="55px" margin="20px 0px">
           <Grid margin="0px 0px 50px 0px">
             <Text size="1em">작성자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;시간</Text>
