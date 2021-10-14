@@ -15,7 +15,7 @@ const Header = (props) => {
   if (isLogin && isSession) {
     return (
       <>
-        <Grid isFlex height="80px" padding="0px 10%" bg="#afc2cb">
+        <Grid isFlex width="100%" height="12vh" padding="0px 10%" bg="#afc2cb">
           <Text
             _onClick={() => {
               history.push("/");
@@ -58,7 +58,7 @@ const Header = (props) => {
   return (
     // 로그인 안 했을 때 헤더
     <>
-      <Grid isFlex height="80px" padding="0px 10%" bg="#afc2cb">
+      <Grid isFlex width="100%" height="12vh" padding="0px 10%" bg="#afc2cb">
         <Text
           _onClick={() => {
             history.push("/");
