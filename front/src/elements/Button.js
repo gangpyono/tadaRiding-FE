@@ -56,7 +56,6 @@ Button.defaultProps = {
   color: "black",
   backgroundColor: "#90EE90",
   isFloat: "",
-
   children: null,
   _onClick: () => {},
   isShadow: false,

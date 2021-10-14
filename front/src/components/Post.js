@@ -76,7 +76,7 @@ const Post = (props) => {
           </Text>
 
           <Grid isFlex padding="10px">
-            <Text size="15px" margin=" 10px">
+            <Text size="15px" margin="10px">
               1
             </Text>
             {/* 좋아요 버튼 */}

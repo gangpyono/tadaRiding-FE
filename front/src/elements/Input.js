@@ -53,6 +53,7 @@ const Input = (props) => {
       {label && <Text>{label}</Text>}
       <ElInput
         {...styles}
+        value={value}
         label={label}
         type={type}
         placeholder={placeholder}
@@ -78,6 +79,7 @@ Input.defaultProps = {
   placeholder: "텍스트를 입력하세요",
   enterSubmit: () => {},
   _onChange: () => {},
+  value: "",
 };
 
 const ElInput = styled.input`

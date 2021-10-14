@@ -21,6 +21,8 @@ const Grid = (props) => {
     isPosition,
     top,
     right,
+    maxWidth,
+    minWidth,
   } = props;
 
   const styles = {
@@ -42,6 +44,8 @@ const Grid = (props) => {
     isPosition,
     top,
     right,
+    maxWidth,
+    minWidth,
   };
 
   return (
@@ -55,6 +59,8 @@ Grid.defaultProps = {
   children: null,
   width: false,
   height: false,
+  maxWidth: "",
+  minWidth: "",
   padding: false,
   margin: false,
   bg: false,
@@ -76,6 +82,8 @@ Grid.defaultProps = {
 const GridBox = styled.div`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
+  max-width: ${(props) => props.maxWidth};
+  min-width: ${(props) => props.minWidth};
   box-sizing: border-box;
   ${(props) => (props.padding ? `padding : ${props.padding}; ` : "")};
   ${(props) => (props.margin ? `margin : ${props.margin}; ` : "")};
