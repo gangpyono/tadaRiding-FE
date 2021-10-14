@@ -23,18 +23,19 @@ const Login = () => {
 
   return (
     <>
-      <Text margin="60px" size="2em" color="#849298" bold align="center">
-        Login
-      </Text>
       <Grid
-        width="450px"
+        width="35vw"
+        minWidth="420px"
         margin="50px auto"
         padding="16px"
         borderRadius="15px"
         bg="#e1f5fe"
         isShadow
       >
-        <Grid padding="60px 0px 25px 0px" width="77%" margin="0 auto">
+        <Text margin="60px" size="2em" color="#849298" bold align="center">
+          Login
+        </Text>
+        <Grid padding="25px 0px 25px 0px" width="77%" margin="0 auto">
           <Input
             padding="10px"
             width="100%"
