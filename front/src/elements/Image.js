@@ -2,15 +2,17 @@ import React from "react";
 import styled from "styled-components";
 
 const Image = (props) => {
-  const { size, src } = props;
+  const { size, src, _onClick, cursor } = props;
   const styles = {
     size: size,
     src: src,
+    _onClick: _onClick,
+    cursor: cursor,
   };
   return (
     <React.Fragment>
       <ImageOutter>
-        <ImageInner {...styles}></ImageInner>
+        <ImageInner {...styles} onClick={_onClick}></ImageInner>
       </ImageOutter>
     </React.Fragment>
   );
@@ -19,6 +21,8 @@ const Image = (props) => {
 Image.defaultProps = {
   src: "https://aomori-cycling.com/kr/wp-content/themes/cycling/images/basi_img-road.jpg",
   size: 200,
+  _onClick: () => {},
+  cursor: false,
 };
 
 const ImageOutter = styled.div`
@@ -33,5 +37,6 @@ const ImageInner = styled.div`
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+  ${(props) => (props.cursor ? `cursor: pointer;` : "")};
 `;
 export default Image;

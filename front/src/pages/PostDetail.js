@@ -1,4 +1,6 @@
 import React from "react";
+import styled from "styled-components";
+
 import { Grid, Text, Input, Button, Image } from "../elements/index";
 
 import CommentWrite from "../components/CommentWrite";
@@ -11,9 +13,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useSelector } from "react-redux";
 
 const PostDetail = (props) => {
-  console.log(props.match.params.id);
-  const id = props.match.params.id;
-
+  const _postUid = props.match.params.postUid;
+  const postList = useSelector((state) => state.post.list);
+  const post = postList.find((p) => p.postUid === _postUid);
+  console.log(postList);
   return (
     <React.Fragment>
       {/* <Text margin="80px" size="2em" bold align="center">
@@ -55,25 +58,13 @@ const PostDetail = (props) => {
           bg="#e1f5fe"
           isShadow
         >
-          <Grid isPosition="absolute">
-            <Grid isPosition="absolute" right="-740px" top="76px">
-              <Button
-                width="45px"
-                isShadow
-                backgroundColor="#ffffee"
-                padding="8px"
-              >
-                참석
-              </Button>
-            </Grid>
-          </Grid>
-          <Text size="2em" bold margin="20px 0px 0px 20px">
-            제목
+          <Text size="2em" bold margin="20px 0px 0px 20px" color="#727e82">
+            {post.postTitle}
           </Text>
 
           <Grid isFlex>
             <Grid width="300px">
-              <Image src={props.src}></Image>
+              <Image src={post.postImage}></Image>
             </Grid>
 
             <Grid width="350px">
@@ -90,7 +81,7 @@ const PostDetail = (props) => {
                   bold
                   align="center"
                 >
-                  1/4
+                  {post.participants.length}/{post.limitedUserNum}
                 </Text>
               </Grid>
               <Grid isFlex padding="10px 0px" width="100%" margin="0 auto">
@@ -106,7 +97,7 @@ const PostDetail = (props) => {
                   bold
                   align="center"
                 >
-                  강북
+                  {post.origin}
                 </Text>
               </Grid>
               <Grid isFlex padding="10px 0px" width="100%" margin="0 auto">
@@ -122,7 +113,7 @@ const PostDetail = (props) => {
                   bold
                   align="center"
                 >
-                  강북
+                  {post.destination}
                 </Text>
               </Grid>
               <Grid isFlex padding="10px 0px" width="100%" margin="0 auto">
@@ -138,7 +129,7 @@ const PostDetail = (props) => {
                   bold
                   align="center"
                 >
-                  2021-10-08
+                  {post.startTime}
                 </Text>
               </Grid>
             </Grid>
@@ -156,18 +147,12 @@ const PostDetail = (props) => {
               size="1em"
               // bold
             >
-              날도좋은데 라이딩어때요?날도좋은데 라이딩어때요?날도좋은데
-              라이딩어때요?날도좋은데 라이딩어때요?날도좋은데 라이딩어때요?
-              날도좋은데 라이딩어때요?날도좋은데 라이딩어때요?날도좋은데
-              라이딩어때요?날도좋은데 라이딩어때요?날도좋은데 라이딩어때요?
-              날도좋은데 라이딩어때요?날도좋은데 라이딩어때요?날도좋은데
-              라이딩어때요?날도좋은데 라이딩어때요?날도좋은데 라이딩어때요?
+              {post.postDesc}
             </Text>
           </Grid>
-
-          <CommentWrite postUid={id} />
+          <CommentWrite postUid={_postUid} />
         </Grid>
-        <CommentList postUid={id} />
+        <CommentList postUid={_postUid} />
       </Grid>
     </React.Fragment>
   );

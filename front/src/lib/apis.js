@@ -21,5 +21,5 @@ export const apis = {
   // 좋아요 토글
   toggleLike: (id) => instance.post(`/api/likes/${id}`),
   // 댓글 불러오기
-  getComment: () => instance.get("/api/posts/"),
+  getComment: () => instance.get("/api/posts"),
 };

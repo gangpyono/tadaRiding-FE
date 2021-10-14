@@ -17,7 +17,7 @@ const loadPost = createAction(LOAD_POST, (post_list) => ({ post_list }));
 const addPost = createAction(ADD_POST, (post) => ({ post }));
 const updatePost = createAction(UPDATE_POST, (post) => ({ post }));
 const deletePost = createAction(DELETE_POST, (postUid) => ({ postUid }));
-const toggleLike = createAction(TOGGLE_LIKE, (postUid) => ({ postUid }));
+const toggleLike = createAction(TOGGLE_LIKE, (postUid, likeCnt) => ({ postUid, likeCnt }));
 
 // initialState
 const initialState = {
@@ -108,11 +108,14 @@ const deletePostMiddleware = (postUid) => {
 
 const toggleLikeMiddleware = (postUid) => {
   return function (dispatch, getState, { history }) {
+    // const user = getState.user.user;
+
     apis.toggleLike(postUid).then((res) => {
+      const likeCnt = res.data.postLikeCnt;
       if (res.data.likeState) {
-        dispatch(toggleLike(postUid));
+        dispatch(toggleLike(postUid, likeCnt));
       } else {
-        dispatch();
+        dispatch(toggleLike(postUid, likeCnt));
       }
     });
   };
@@ -146,15 +149,7 @@ export default handleActions(
     [TOGGLE_LIKE]: (state, action) =>
       produce(state, (draft) => {
         const idx = draft.list.findIndex((p) => p.postUid === action.payload.postUid);
-        const likeState = draft.list[idx].postLikeState;
-
-        if (likeState) {
-          draft.list[idx].postLikeCnt--;
-          draft.list[idx].postLikeState = false;
-        } else {
-          draft.list[idx].postLikeCnt++;
-          draft.list[idx].postLikeState = true;
-        }
+        draft.list[idx].postLikeCnt = action.payload.likeCnt;
       }),
   },
   initialState
@@ -167,6 +162,7 @@ const actionCreators = {
   addPostMiddleware,
   updatePostMiddleware,
   deletePostMiddleware,
+  toggleLikeMiddleware,
 };
 
 export { actionCreators };

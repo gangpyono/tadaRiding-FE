@@ -7,7 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 //modules
-import { actionCreators as cmtActions } from "../redux/modules/comment";
+import comment, {
+  actionCreators as cmtActions,
+} from "../redux/modules/comment";
 
 //moment
 import moment from "moment";
@@ -18,14 +20,13 @@ const CommentList = (props) => {
   console.log(comment_list);
   // const product_list = useSelector((state) => state.product.product_list);
 
-  console.log(comment_list);
-  const { post_id } = props;
+  const { postUid } = props;
 
   const createAt = moment().format("YYYY-MM-DD"); //작성된 시점의 시간을 보냄
 
   // React.useEffect(() => {
-  //   if (!comment_list[post_id]) {
-  //     dispatch(cmtActions.getCommentDB(post_id));
+  //   if (!comment_list[postUid]) {
+  //     dispatch(cmtActions.getCommentDB(postUid));
   //   }
   // }, []);
 
@@ -34,13 +35,13 @@ const CommentList = (props) => {
   // }
 
   // const listAddComment = () => {
-  //   if(!is_login){
-  //     if(window.confirm("로그인창으로 이동합니다")){
-  //       history.push("/login")
+  //   if (!is_login) {
+  //     if (window.confirm("로그인창으로 이동합니다")) {
+  //       history.push("/login");
   //     }
   //   }
-  // }
-
+  // };
+  // console.log(comment_list[postUid]);
   return (
     <React.Fragment>
       <Grid width="100%" padding="55px" margin="20px 0px">
@@ -52,16 +53,14 @@ const CommentList = (props) => {
     </React.Fragment>
   );
 };
-CommentList.defaultProps = {
-  postUid: null,
-};
 
 const CommentItem = (props) => {
   return (
     <Grid margin="0px 0px 50px 0px">
       <Grid isFlex>
         <Text size="1em">
-          {props.userid}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{props.commentDate}
+          {props.userUid}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          {props.commentDate}
         </Text>
         <Button borderRadius="15px" backgroundColor="transparent" width="30px">
           <DeleteIcon />
@@ -76,7 +75,7 @@ const CommentItem = (props) => {
 };
 
 CommentItem.defaultProps = {
-  userid: "Jay",
+  userUid: "Jay",
   commentDesc: "여기가 최고야",
   commentDate: "2021-10-13 18:39:12",
 };

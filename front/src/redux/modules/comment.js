@@ -19,10 +19,6 @@ const addComment = createAction(ADD_COMMENT, (postUid, comment) => ({
 }));
 
 const initialState = {
-  list: [],
-};
-
-const initialComment = {
   list: [
     {
       commentUid: "68f58f40",
@@ -33,23 +29,34 @@ const initialComment = {
   ],
 };
 
-// const getCommentDB = (post_id) => {
-//   return (dispatch, getState, { history }) => {
-//     // if (!post_id) {
-//     //   return;
-//     // }
-//     apis
-//       .getComment()
-//       .then((res) => {
-//         console.log(res.data);
-//         const comment_list = res.data.posts;
-//         dispatch(setComment(comment_list));
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   };
+// const initialComment = {
+//   list: [
+//     // {
+//     //   commentUid: "68f58f40",
+//     //   userUid: "Jay",
+//     //   commentDesc: "오늘 하루는 좋은 일들로만 가득했으면 좋겠",
+//     //   commentDate: "21.10.11",
+//     // },
+//   ],
 // };
+
+const getCommentDB = (postUid) => {
+  return (dispatch, getState, { history }) => {
+    //     // if (!post_id) {
+    //     //   return;
+    //     // }
+    apis
+      .getComment()
+      .then((res) => {
+        console.log(res.data);
+        const comment_list = res.data.posts;
+        dispatch(setComment(comment_list));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
 // middelware actions
 // const getCommentFB = (post_id) => {
 //   return function (dispatch, getState, { history }) {};
@@ -77,7 +84,7 @@ export default handleActions(
 
 // action creator export
 const actionCreators = {
-  // getCommentDB,
+  getCommentDB,
   setComment,
   addComment,
 };

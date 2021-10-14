@@ -55,7 +55,13 @@ const Post = (props) => {
       )}
 
       <Grid margin="0px 20px 20px 20px">
-        <Image src={props.postImage}></Image>
+        <Image
+          src={props.postImage}
+          _onClick={() => {
+            history.push(`/PostDetail/${props.postUid}`);
+          }}
+          cursor
+        ></Image>
       </Grid>
       {/*  */}
       <Text bold>
