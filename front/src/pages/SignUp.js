@@ -7,12 +7,7 @@ import { history } from "../redux/configureStore";
 import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
 // 유효성 체크 함수
-import {
-  idCheck,
-  pwdCheck,
-  phoneNumberChec,
-  phoneNumberCheck,
-} from "../shared/common";
+import { idCheck, pwdCheck, phoneNumberCheck } from "../shared/common";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -25,12 +20,13 @@ const SignUp = () => {
   const [passwordHelp, setPasswordHelp] = React.useState(false);
 
   const passwordChk = (e) => {
+    // password !== passwordCheck 일 때(true) 문구가 나타난다.
     setPasswordHelp(password !== e.target.value);
-    setPasswordCheck(e.target.value);
   };
 
   console.log(passwordHelp);
   console.log(password);
+  console.log(passwordCheck);
   const signUp = () => {
     if (id === "" || nickname === "" || password === "" || phoneNumber === "") {
       window.alert(
@@ -120,7 +116,6 @@ const SignUp = () => {
         {/* 비밀번호 */}
         <Grid padding="25px 0px" width="77%" margin="0 auto">
           <Input
-            passwordChk
             value={password}
             padding="10px"
             width="100%"
@@ -128,6 +123,7 @@ const SignUp = () => {
             type="password"
             placeholder="비밀번호를 입력하세요"
             _onChange={(e) => {
+              passwordChk(e);
               setPassword(e.target.value);
             }}
           ></Input>
@@ -142,18 +138,20 @@ const SignUp = () => {
         {/* 비밀번호 체크 */}
         <Grid width="77%" margin="0 auto">
           <Input
-            passwordChk
+            value={passwordCheck}
             padding="10px"
             width="100%"
             radius="15px"
             type="password"
-            value={passwordCheck}
             placeholder="비밀번호를 한번 더 입력하세요"
             _onChange={(e) => {
               passwordChk(e);
+              setPasswordCheck(e.target.value);
             }}
           ></Input>
-          {passwordHelp && (
+
+          {/* 비밀번호 도움문구 */}
+          {password !== passwordCheck && (
             <Text margin="5px 0px 0px 10px" size="12px" color="red">
               비밀번호가 일치하지 않습니다.
             </Text>
