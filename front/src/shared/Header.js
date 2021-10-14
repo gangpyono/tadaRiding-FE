@@ -16,17 +16,17 @@ const Header = (props) => {
     return (
       <>
         <Grid isFlex height="80px" padding="0px 10%" bg="#afc2cb">
-          <Button
-            cursor
-            size="2em"
-            bold
-            color="#ffffee"
+          <Text
             _onClick={() => {
               history.push("/");
             }}
+            size="2em"
+            bold
+            color="#ffffee"
+            cursor
           >
             Tada Riding
-          </Button>
+          </Text>
           <Grid isFlex>
             <Button
               isShadow

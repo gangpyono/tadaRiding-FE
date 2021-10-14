@@ -29,6 +29,8 @@ const SignUp = () => {
     setPasswordCheck(e.target.value);
   };
 
+  console.log(passwordHelp);
+  console.log(password);
   const signUp = () => {
     if (id === "" || nickname === "" || password === "" || phoneNumber === "") {
       window.alert(
@@ -78,11 +80,15 @@ const SignUp = () => {
         bg="#e1f5fe"
         isShadow
       >
+        {/* 제목 */}
         <Text margin="40px" size="2em" color="#849298" bold align="center">
           SignUp
         </Text>
+
+        {/* 아이디 */}
         <Grid padding="40px 0px 25px 0px" width="77%" margin="0 auto">
           <Input
+            value={id}
             padding="10px"
             width="100%"
             radius="15px"
@@ -91,13 +97,16 @@ const SignUp = () => {
               setId(e.target.value);
             }}
           ></Input>
+
           <Text margin="5px 0px 0px 10px" size="12px" color="#586165">
             2-10자의 영문 숫자 조합만 입력가능합니다.
           </Text>
         </Grid>
 
+        {/* 닉네임 */}
         <Grid width="77%" margin="0 auto">
           <Input
+            value={nickname}
             padding="10px"
             width="100%"
             radius="15px"
@@ -108,8 +117,11 @@ const SignUp = () => {
           ></Input>
         </Grid>
 
+        {/* 비밀번호 */}
         <Grid padding="25px 0px" width="77%" margin="0 auto">
           <Input
+            passwordChk
+            value={password}
             padding="10px"
             width="100%"
             radius="15px"
@@ -127,13 +139,15 @@ const SignUp = () => {
           </Text>
         </Grid>
 
+        {/* 비밀번호 체크 */}
         <Grid width="77%" margin="0 auto">
           <Input
+            passwordChk
             padding="10px"
             width="100%"
             radius="15px"
             type="password"
-            value={passwordChk}
+            value={passwordCheck}
             placeholder="비밀번호를 한번 더 입력하세요"
             _onChange={(e) => {
               passwordChk(e);
@@ -146,8 +160,10 @@ const SignUp = () => {
           )}
         </Grid>
 
+        {/* 핸드폰번호 */}
         <Grid padding="25px 0px 16px 0px" width="77%" margin="0 auto">
           <Input
+            value={phoneNumber}
             padding="10px"
             width="100%"
             radius="15px"
@@ -161,6 +177,7 @@ const SignUp = () => {
           </Text>
         </Grid>
 
+        {/* 버튼 */}
         <Grid isFlex width="70%" margin="40px auto">
           <Button
             isShadow
@@ -173,6 +190,7 @@ const SignUp = () => {
           >
             취소
           </Button>
+
           <Button
             isShadow
             padding="10px"

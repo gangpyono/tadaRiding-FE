@@ -37,6 +37,7 @@ const Login = () => {
         </Text>
         <Grid padding="25px 0px 25px 0px" width="77%" margin="0 auto">
           <Input
+            value={id}
             padding="10px"
             width="100%"
             radius="15px"
@@ -46,6 +47,7 @@ const Login = () => {
         </Grid>
         <Grid width="77%" margin="0 auto">
           <Input
+            value={password}
             padding="10px"
             width="100%"
             radius="15px"
