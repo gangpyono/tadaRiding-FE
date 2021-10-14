@@ -13,10 +13,29 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useSelector } from "react-redux";
 
 const PostDetail = (props) => {
+  const dispatch = useDispatch();
   const _postUid = props.match.params.postUid;
-  const postList = useSelector((state) => state.post.list);
-  const post = postList.find((p) => p.postUid === _postUid);
-  console.log(postList);
+
+  let post = null;
+  React.useEffect(() => {
+    async function fetchData() {
+      // You can await here
+      post = await apis.getDetailPost(_postUid);
+      // ...
+    }
+    fetchData();
+    console.log("디테일 페이지입니다.");
+  }, []);
+
+  const [postLikeCnt, setPostLikeCnt] = React.useState(post.postLikeCnt);
+  const [like, setLike] = React.useState(post.postLikeState);
+
+  const updateLike = () => {
+    dispatch(postActions.toggleLikeMiddleware(post.postUid));
+    if (like) setPostLikeCnt(postLikeCnt + 1);
+    else setPostLikeCnt(postLikeCnt - 1);
+  };
+
   return (
     <React.Fragment>
       {/* <Text margin="80px" size="2em" bold align="center">
@@ -24,11 +43,7 @@ const PostDetail = (props) => {
       </Text> */}
       <Grid width="800px" margin="100px auto">
         <Grid padding="10px 0px" width="100%" flexEnd>
-          <Button
-            borderRadius="15px"
-            backgroundColor="transparent"
-            width="30px"
-          >
+          <Button borderRadius="15px" backgroundColor="transparent" width="30px">
             <EditIcon />
           </Button>
           <Button
@@ -40,24 +55,14 @@ const PostDetail = (props) => {
             <DeleteIcon />
           </Button>
           <Grid isFlex>
-            <Button
-              borderRadius="15px"
-              backgroundColor="transparent"
-              width="30px"
-            >
+            <Button borderRadius="15px" backgroundColor="transparent" width="30px">
               <FavoriteBorderIcon />
             </Button>
             <Text size="1em">1</Text>
           </Grid>
         </Grid>
 
-        <Grid
-          width="100%"
-          padding="55px"
-          borderRadius="15px"
-          bg="#e1f5fe"
-          isShadow
-        >
+        <Grid width="100%" padding="55px" borderRadius="15px" bg="#e1f5fe" isShadow>
           <Text size="2em" bold margin="20px 0px 0px 20px" color="#727e82">
             {post.postTitle}
           </Text>
