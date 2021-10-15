@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import apis from "../lib/apis";
 // actions
 import { actionCreators as postActions } from "../redux/modules/post";
+import { addCommentDB, deleteCommentDB } from "../redux/modules/comment";
 
 const PostDetail = (props) => {
   const dispatch = useDispatch();
