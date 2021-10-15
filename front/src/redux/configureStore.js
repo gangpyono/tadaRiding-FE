@@ -12,7 +12,6 @@ export const history = createBrowserHistory(); // hsitory 객체생성
 const rootReducer = combineReducers({
   user: user, //  필요시 리듀서추가
   post: post,
-  comment: comment,
   router: connectRouter(history), // 라우터와 히스토리가 연결된다.
 });
 

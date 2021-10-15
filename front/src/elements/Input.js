@@ -59,7 +59,6 @@ const Input = (props) => {
         placeholder={placeholder}
         enterSubmit={enterSubmit}
         onChange={_onChange}
-        value={value}
         defaultValue={defaultValue ? defaultValue : null}
       />
     </>

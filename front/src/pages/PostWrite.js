@@ -17,9 +17,13 @@ const PostWrite = (props) => {
   const post = isEdit ? postList.find((p) => p.postUid === postUid) : null;
 
   const [postTitle, setPostTitle] = React.useState(post ? post.postTitle : "");
-  const [limitedUserNum, setLimitedUserNum] = React.useState(post ? post.limitedUserNum : "");
+  const [limitedUserNum, setLimitedUserNum] = React.useState(
+    post ? post.limitedUserNum : ""
+  );
   const [origin, setOrigin] = React.useState(post ? post.origin : "");
-  const [destination, setDestination] = React.useState(post ? post.destination : "");
+  const [destination, setDestination] = React.useState(
+    post ? post.destination : ""
+  );
   const [postDesc, setPostDesc] = React.useState(post ? post.postDesc : "");
   const [postImage, setPostImage] = React.useState(post ? post.postImage : "");
   // 수정시 날짜 T 넣어줄것.
@@ -78,6 +82,7 @@ const PostWrite = (props) => {
       startTime: startTime,
       postDate: moment().format("YYYY-MM-DD hh:mm:ss"),
     };
+    console.log(post);
     dispatch(postActions.addPostMiddleware(post));
   };
 
@@ -119,7 +124,7 @@ const PostWrite = (props) => {
             radius="15px"
             placeholder="제목을 입력하세요"
             _onChange={changePostTitle}
-            defaultValue={postTitle}
+            value={postTitle}
           ></Input>
         </Grid>
         <Grid isFlex padding="25px 0px" width="77%" margin="0 auto">
@@ -132,7 +137,7 @@ const PostWrite = (props) => {
             radius="15px"
             placeholder="인원수를 입력하세요"
             _onChange={changeLimitedUserNum}
-            defaultValue={limitedUserNum}
+            value={limitedUserNum}
           ></Input>
         </Grid>
         <Grid isFlex padding="25px 0px" width="77%" margin="0 auto">
@@ -145,7 +150,7 @@ const PostWrite = (props) => {
             radius="15px"
             placeholder="출발지를 입력하세요"
             _onChange={changeOrigin}
-            defaultValue={origin}
+            value={origin}
           ></Input>
         </Grid>
         <Grid isFlex padding="25px 0px" width="77%" margin="0 auto">
@@ -158,7 +163,7 @@ const PostWrite = (props) => {
             radius="15px"
             placeholder="도착지를 입력하세요"
             _onChange={changeDestination}
-            defaultValue={destination}
+            value={destination}
           ></Input>
         </Grid>
 
@@ -198,7 +203,7 @@ const PostWrite = (props) => {
             InputLabelProps={{ shrink: true }}
             onChange={selectDate}
             ref={dateInput}
-            value="2018-06-12T19:30"
+            // value="2018-06-12T19:30"
           />
         </Grid>
         <Grid isFlex padding="25px 0px" width="77%" margin="0 auto">
@@ -212,17 +217,27 @@ const PostWrite = (props) => {
             radius="15px"
             placeholder="내용을 입력하세요"
             _onChange={changePostDesc}
-            defaultValue={postDesc}
+            value={postDesc}
           ></Input>
         </Grid>
         <Grid isFlex width="300px" margin="50px auto">
           {/* 수정/추가버튼 */}
           {isEdit ? (
-            <Button isShadow padding="10px" backgroundColor="#ffffee" _onClick={updatePost}>
+            <Button
+              isShadow
+              padding="10px"
+              backgroundColor="#ffffee"
+              _onClick={updatePost}
+            >
               수정완료
             </Button>
           ) : (
-            <Button isShadow padding="10px" backgroundColor="#ffffee" _onClick={addPost}>
+            <Button
+              isShadow
+              padding="10px"
+              backgroundColor="#ffffee"
+              _onClick={addPost}
+            >
               게시물 생성
             </Button>
           )}

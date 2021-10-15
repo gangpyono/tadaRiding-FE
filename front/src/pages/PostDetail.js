@@ -1,7 +1,6 @@
 import React from "react";
-import styled from "styled-components";
 
-import { Grid, Text, Input, Button, Image } from "../elements/index";
+import { Grid, Text, Button, Image } from "../elements/index";
 
 import CommentWrite from "../components/CommentWrite";
 import CommentList from "../components/CommentList";
@@ -10,23 +9,30 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+// axios instance
+import apis from "../lib/apis";
+// actions
+import { actionCreators as postActions } from "../redux/modules/post";
 
 const PostDetail = (props) => {
   const dispatch = useDispatch();
   const _postUid = props.match.params.postUid;
+  const [post, setPost] = React.useState("");
 
-  let post = null;
   React.useEffect(() => {
-    async function fetchData() {
-      // You can await here
-      post = await apis.getDetailPost(_postUid);
-      // ...
-    }
-    fetchData();
+    apis
+      .getDetail(_postUid)
+      .then((res) => {
+        console.log(res.data);
+        const post = res.data.post;
+        setPost(post);
+      })
+      .catch((err) => console.log(err));
     console.log("디테일 페이지입니다.");
   }, []);
 
+  console.log(post);
   const [postLikeCnt, setPostLikeCnt] = React.useState(post.postLikeCnt);
   const [like, setLike] = React.useState(post.postLikeState);
 
@@ -38,12 +44,14 @@ const PostDetail = (props) => {
 
   return (
     <React.Fragment>
-      {/* <Text margin="80px" size="2em" bold align="center">
-        상세페이지
-      </Text> */}
       <Grid width="800px" margin="100px auto">
+        {/* buttons */}
         <Grid padding="10px 0px" width="100%" flexEnd>
-          <Button borderRadius="15px" backgroundColor="transparent" width="30px">
+          <Button
+            borderRadius="15px"
+            backgroundColor="transparent"
+            width="30px"
+          >
             <EditIcon />
           </Button>
           <Button
@@ -55,24 +63,37 @@ const PostDetail = (props) => {
             <DeleteIcon />
           </Button>
           <Grid isFlex>
-            <Button borderRadius="15px" backgroundColor="transparent" width="30px">
+            <Button
+              borderRadius="15px"
+              backgroundColor="transparent"
+              width="30px"
+            >
               <FavoriteBorderIcon />
             </Button>
             <Text size="1em">1</Text>
           </Grid>
         </Grid>
 
-        <Grid width="100%" padding="55px" borderRadius="15px" bg="#e1f5fe" isShadow>
+        <Grid
+          width="100%"
+          padding="55px"
+          borderRadius="15px"
+          bg="#e1f5fe"
+          isShadow
+        >
+          {/* 제목 */}
           <Text size="2em" bold margin="20px 0px 0px 20px" color="#727e82">
             {post.postTitle}
           </Text>
 
           <Grid isFlex>
+            {/* 이미지 */}
             <Grid width="300px">
               <Image src={post.postImage}></Image>
             </Grid>
 
             <Grid width="350px">
+              {/* 인원수 */}
               <Grid isFlex padding="10px 0px" width="100%" margin="0 auto">
                 <Text size="1em" bold color="#727e82">
                   인원수
@@ -83,12 +104,15 @@ const PostDetail = (props) => {
                   borderRadius="10px"
                   width="250px"
                   size="1em"
-                  bold
                   align="center"
                 >
-                  {post.participants.length}/{post.limitedUserNum}
+                  {post.attendUserNicknames
+                    ? `${post.attendUserNicknames.length}/${post.limitedUserNum}`
+                    : ""}
                 </Text>
               </Grid>
+
+              {/* 출발지 */}
               <Grid isFlex padding="10px 0px" width="100%" margin="0 auto">
                 <Text size="1em" bold color="#727e82">
                   출발
@@ -99,12 +123,13 @@ const PostDetail = (props) => {
                   borderRadius="10px"
                   width="250px"
                   size="1em"
-                  bold
                   align="center"
                 >
                   {post.origin}
                 </Text>
               </Grid>
+
+              {/* 도착지 */}
               <Grid isFlex padding="10px 0px" width="100%" margin="0 auto">
                 <Text size="1em" bold color="#727e82">
                   도착
@@ -115,14 +140,15 @@ const PostDetail = (props) => {
                   borderRadius="10px"
                   width="250px"
                   size="1em"
-                  bold
                   align="center"
                 >
                   {post.destination}
                 </Text>
               </Grid>
+
+              {/* 출발시간 */}
               <Grid isFlex padding="10px 0px" width="100%" margin="0 auto">
-                <Text size="1em" bold>
+                <Text size="1em" bold color="#727e82">
                   출발시간
                 </Text>
                 <Text
@@ -131,7 +157,6 @@ const PostDetail = (props) => {
                   borderRadius="10px"
                   width="250px"
                   size="1em"
-                  bold
                   align="center"
                 >
                   {post.startTime}
@@ -140,6 +165,7 @@ const PostDetail = (props) => {
             </Grid>
           </Grid>
 
+          {/* 내용 */}
           <Grid width="100%">
             <Text padding="10px 0px" size="1em" bold color="#727e82">
               내용
@@ -150,14 +176,13 @@ const PostDetail = (props) => {
               borderRadius="10px"
               width="100%"
               size="1em"
-              // bold
             >
               {post.postDesc}
             </Text>
           </Grid>
-          <CommentWrite postUid={_postUid} />
+          <CommentWrite postUid={props.postUid} />
         </Grid>
-        <CommentList postUid={_postUid} />
+        <CommentList comments={props.comments} />
       </Grid>
     </React.Fragment>
   );

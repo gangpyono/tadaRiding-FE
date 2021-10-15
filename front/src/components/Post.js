@@ -72,7 +72,10 @@ const Post = (props) => {
         <Grid isFlex padding="10px">
           <Text size="15px">출발일 : {props.startTime}</Text>
           <Text size="15px">
-            인원수 : {props.participants.length}/ {props.limitedUserNum}
+            인원수 :
+            {props.participants
+              ? `${props.participants.length}` / `${props.limitedUserNum}`
+              : ""}
           </Text>
 
           <Grid isFlex padding="10px">

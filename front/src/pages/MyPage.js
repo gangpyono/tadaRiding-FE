@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Grid, Button, Text, Image } from "../elements/index.js";
+import { Grid, Text, Image } from "../elements/index.js";
 import Post from "../components/Post";
 const MyPage = (props) => {
   return (

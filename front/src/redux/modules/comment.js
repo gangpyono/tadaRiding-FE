@@ -1,92 +1,25 @@
-import { produce } from "immer";
-import { createAction, handleActions } from "redux-actions";
 import { apis } from "../../lib/apis";
 
-// import moment from "moment";
-
-// actions
-const SET_COMMENT = "SET_COMMENT";
-const ADD_COMMENT = "ADD_COMMENT";
-
-// action creators
-const setComment = createAction(SET_COMMENT, (postUid, comment_list) => ({
-  postUid,
-  comment_list,
-}));
-const addComment = createAction(ADD_COMMENT, (postUid, comment) => ({
-  postUid,
-  comment,
-}));
-
-const initialState = {
-  list: [
-    {
-      commentUid: "68f58f40",
-      userUid: "Jay",
-      commentDesc: "오늘 하루는 좋은 일들로만 가득했으면 좋겠",
-      commentDate: "21.10.11",
-    },
-  ],
+const addCommentDB = (comment) => {
+  apis
+    .addComment(comment)
+    .then((res) => {
+      if (res.data.msg === "성공적으로 댓글이 등록되었습니다.") {
+        console.log("댓글이 추가되었습니다.");
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
-// const initialComment = {
-//   list: [
-//     // {
-//     //   commentUid: "68f58f40",
-//     //   userUid: "Jay",
-//     //   commentDesc: "오늘 하루는 좋은 일들로만 가득했으면 좋겠",
-//     //   commentDate: "21.10.11",
-//     // },
-//   ],
-// };
-
-const getCommentDB = (postUid) => {
-  return (dispatch, getState, { history }) => {
-    //     // if (!post_id) {
-    //     //   return;
-    //     // }
-    apis
-      .getComment()
-      .then((res) => {
-        console.log(res.data);
-        const comment_list = res.data.posts;
-        dispatch(setComment(comment_list));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-};
-// middelware actions
-// const getCommentFB = (post_id) => {
-//   return function (dispatch, getState, { history }) {};
-// };
-
-//reducer
-export default handleActions(
-  {
-    [SET_COMMENT]: (state, action) =>
-      produce(state, (draft) => {
-        draft.list[action.payload.postUid] = action.payload.list;
-      }),
-    // [SET_COMMENT]: (state, action) =>
-    //   produce(state, (draft) => {
-    //     // console.log(action.payload);
-    //     // draft.list = action.payload.list;
-    //   }),
-    [ADD_COMMENT]: (state, action) =>
-      produce(state, (draft) => {
-        // draft.list[action.payload.postUid].unshift(action.payload.comment);
-      }),
-  },
-  initialState
-);
-
-// action creator export
-const actionCreators = {
-  getCommentDB,
-  setComment,
-  addComment,
+const deleteCommentDB = (postUid, commentUid) => {
+  apis
+    .deleteComment(postUid, commentUid)
+    .then(() => {
+      window.alert("댓글이 삭제되었습니다.");
+    })
+    .catch((err) => console.log(err));
 };
 
-export { actionCreators };
+export { addCommentDB, deleteCommentDB };

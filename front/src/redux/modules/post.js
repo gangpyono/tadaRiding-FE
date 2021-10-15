@@ -17,35 +17,14 @@ const loadPost = createAction(LOAD_POST, (post_list) => ({ post_list }));
 const addPost = createAction(ADD_POST, (post) => ({ post }));
 const updatePost = createAction(UPDATE_POST, (post) => ({ post }));
 const deletePost = createAction(DELETE_POST, (postUid) => ({ postUid }));
-const toggleLike = createAction(TOGGLE_LIKE, (postUid, likeCnt) => ({ postUid, likeCnt }));
+const toggleLike = createAction(TOGGLE_LIKE, (postUid, likeCnt) => ({
+  postUid,
+  likeCnt,
+}));
 
 // initialState
 const initialState = {
-  list: [
-    {
-      postState: true,
-      postUid: "9d773f60-2b87-11ec-84a6-a5190298305d",
-      postTitle: "오늘 춘천 어때?",
-      postDesc: "강원도 춘천이 굉장히 공기가 좋고 자전거 도로가...",
-      postImage: "https://www.dailysecu.com/news/photo/202104/123449_145665_1147.png",
-      postRegister: "c7592940-2b75-11ec-a5f6-d11c3508bb61",
-      postDate: "21.10.12",
-
-      origin: "경기도 용인시 기흥구 구갈로",
-      destination: "경원도 춘천시",
-
-      limitedUserNum: 4,
-
-      postLikeCnt: 1,
-      startTime: "08:00",
-
-      participants: [
-        "c7592940-2b75-11ec-a5f6-d11c3508bb61",
-        "c7592940-2b75-11ec-a5f6-d11c3508bb61",
-        "c7592940-2b75-11ec-a5f6-d11c3508bb61",
-      ],
-    },
-  ],
+  list: [{}],
 };
 
 //middelware actions
@@ -54,6 +33,7 @@ const loadPostMiddleware = () => {
     apis
       .getPost()
       .then((res) => {
+        console.log(res);
         const postList = res.data.posts;
         dispatch(loadPost(postList));
       })
@@ -71,6 +51,9 @@ const addPostMiddleware = (post) => {
         const post = res.data.post;
         dispatch(addPost(post));
         window.alert(res.data.msg);
+      })
+      .then(() => {
+        history.push("/");
       })
       .catch(() => {
         window.alert("게시물작성에 실패하였습니다.");
@@ -136,19 +119,25 @@ export default handleActions(
 
     [UPDATE_POST]: (state, action) =>
       produce(state, (draft) => {
-        const idx = draft.list.findIndex((p) => p.postUid === action.payload.post.postUid);
+        const idx = draft.list.findIndex(
+          (p) => p.postUid === action.payload.post.postUid
+        );
         draft.list[idx] = { ...draft.list[idx], ...action.payload.post };
       }),
 
     [DELETE_POST]: (state, action) =>
       produce(state, (draft) => {
-        const idx = draft.list.findIndex((p) => p.postUid === action.payload.postUid);
+        const idx = draft.list.findIndex(
+          (p) => p.postUid === action.payload.postUid
+        );
         draft.list.splice(idx, 1);
       }),
 
     [TOGGLE_LIKE]: (state, action) =>
       produce(state, (draft) => {
-        const idx = draft.list.findIndex((p) => p.postUid === action.payload.postUid);
+        const idx = draft.list.findIndex(
+          (p) => p.postUid === action.payload.postUid
+        );
         draft.list[idx].postLikeCnt = action.payload.likeCnt;
       }),
   },

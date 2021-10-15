@@ -5,17 +5,11 @@ import apis from "../../lib/apis";
 
 // actions
 const SET_USER = "SET_USER";
-const GET_USER = "GET_USER";
 const LOG_OUT = "LOG_OUT";
-const LOAD_MY_RIDING = "LOAD_MY_RIDING";
-const LOAD_MY_POST = "LOAD_MY_POST";
 
 // action creators
 const setUser = createAction(SET_USER, (user) => ({ user })); // 유저정보를 리덕스에 저장하는 액션
-const getUser = createAction(GET_USER, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, () => ({}));
-const loadMyRiding = createAction(LOAD_MY_RIDING, () => ({}));
-const loadMyPost = createAction(LOAD_MY_POST, () => ({}));
 
 // initialState
 const initialState = {
@@ -80,10 +74,7 @@ const LogOut = () => {
 const LoginCheckDB = () => {
   return function (dispatch) {
     apis.loginCheck().then((res) => {
-      console.log(res);
-
       if (res.data.success === true) {
-        console.log(res);
         dispatch(
           setUser({
             userNickname: res.data.userNickname,
