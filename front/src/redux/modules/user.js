@@ -6,20 +6,23 @@ import apis from "../../lib/apis";
 // actions
 const SET_USER = "SET_USER";
 const LOG_OUT = "LOG_OUT";
+const GET_USER = "GET_USER";
 
 // action creators
 const setUser = createAction(SET_USER, (user) => ({ user })); // 유저정보를 리덕스에 저장하는 액션
 const logOut = createAction(LOG_OUT, () => ({}));
+const getUser = createAction(GET_USER, () => ({}));
 
 // initialState
 const initialState = {
-  userInfo: {},
+  userInfo: {
+    userUid: "",
+    userNickname: "",
+  },
   isLogin: false,
   myRidingList: [],
   myPostList: [],
 };
-
-//middelware actions
 
 // 회원가입 요청
 const SignUpDB = (userInfo) => {
@@ -49,9 +52,12 @@ const LoginDB = (userInfo) => {
         const USER_TOKEN = res.data.token;
 
         sessionStorage.setItem("USER_TOKEN", USER_TOKEN);
-      })
-      .then(() => {
-        dispatch(setUser(userInfo));
+        dispatch(
+          setUser({
+            userUid: res.data.userUid,
+            userNickname: res.data.userNickname,
+          })
+        );
       })
       .then(() => {
         window.alert("성공적으로 로그인되었습니다. 😆");
@@ -64,10 +70,9 @@ const LoginDB = (userInfo) => {
 const LogOut = () => {
   return function (dispatch, getState, { history }) {
     sessionStorage.removeItem("USER_TOKEN");
-
     dispatch(logOut());
     window.alert("로그아웃 되었습니다!");
-    history.replace("/");
+    history.push("/");
   };
 };
 
@@ -98,15 +103,20 @@ export default handleActions(
       }),
     [LOG_OUT]: (state, action) =>
       produce(state, (draft) => {
-        draft.userInfo = null;
+        draft.userInfo = {
+          userNickname: "",
+          userUid: "",
+        };
         draft.isLogin = false;
       }),
+    [GET_USER]: (state, action) => produce(state, (draft) => {}),
   },
   initialState
 );
 
 //action creator export
 const actionCreators = {
+  getUser,
   SignUpDB,
   LoginDB,
   LogOut,

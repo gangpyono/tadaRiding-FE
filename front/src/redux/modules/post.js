@@ -1,7 +1,5 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
-import { ArrowForwardTwoTone } from "@mui/icons-material";
-import moment from "moment";
 
 import { apis } from "../../lib/apis";
 
@@ -53,9 +51,10 @@ const addPostMiddleware = (post) => {
         window.alert(res.data.msg);
       })
       .then(() => {
-        history.push("/");
+        history.replace("/");
       })
       .catch(() => {
+        console.log("err1");
         window.alert("게시물작성에 실패하였습니다.");
       });
   };

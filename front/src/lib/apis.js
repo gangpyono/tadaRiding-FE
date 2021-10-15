@@ -1,15 +1,25 @@
 import axios from "axios";
 
 const USER_TOKEN = sessionStorage.getItem("USER_TOKEN");
+
 const instance = axios.create({
   // 기본적으로 우리가 바라볼 서버의 주소
-  baseURL: "http://localhost:5000/",
-  headers: {
-    Authorization: `Bearer ${USER_TOKEN}`,
-    // "content-type": "application/json;charset=UTF-8",
-    // accept: "application/json",
-  },
+  baseURL: "http://52.79.249.178/",
 });
+
+instance.interceptors.request.use(
+  function (config) {
+    // 1. 요청 보내기 전에 실행
+    // store의 토큰 값 설정
+    config.headers.Authorization = `Bearer ${USER_TOKEN}`;
+    return config;
+  },
+  function (error) {
+    // Do something with request error
+    console.log("err");
+    return Promise.reject(error);
+  }
+);
 
 export const apis = {
   // 회원가입 요청
@@ -37,6 +47,6 @@ export const apis = {
     instance.delete(`/api/posts/${postUid}/comments/${commentUid}`),
 };
 
-instance.defaults.headers.common["Authorization"] = USER_TOKEN;
+// instance.defaults.headers.common["Authorization"] = USER_TOKEN;
 
 export default apis;

@@ -19,7 +19,7 @@ const Image = (props) => {
 };
 
 Image.defaultProps = {
-  src: "https://aomori-cycling.com/kr/wp-content/themes/cycling/images/basi_img-road.jpg",
+  src: "",
   size: 200,
   _onClick: () => {},
   cursor: false,

@@ -1,8 +1,8 @@
 import { apis } from "../../lib/apis";
 
-const addCommentDB = (comment) => {
+const addCommentDB = (comment, id) => {
   apis
-    .addComment(comment)
+    .addComment(comment, id)
     .then((res) => {
       if (res.data.msg === "성공적으로 댓글이 등록되었습니다.") {
         console.log("댓글이 추가되었습니다.");

@@ -38,8 +38,7 @@ const PostDetail = (props) => {
 
   const updateLike = () => {
     dispatch(postActions.toggleLikeMiddleware(post.postUid));
-    if (like) setPostLikeCnt(postLikeCnt + 1);
-    else setPostLikeCnt(postLikeCnt - 1);
+    setPostLikeCnt(like ? postLikeCnt + 1 : postLikeCnt - 1);
   };
 
   return (
