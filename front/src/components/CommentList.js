@@ -85,3 +85,16 @@ const Line = styled.hr`
 `;
 
 export default CommentList;
+
+
+
+
+
+
+
+
+
+<Grid width="100%" padding="55px" margin="20px 0px">
+{postList.map((post, idx) => {
+
+      </Grid>

@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { Grid, Text, Input, Button, Image } from "../elements/index";
 
 import CommentWrite from "../components/CommentWrite";
-import CommentList from "../components/CommentList";
 
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
@@ -12,11 +11,18 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useSelector } from "react-redux";
 
+import { apis } from "../lib/apis";
+
 const PostDetail = (props) => {
   const _postUid = props.match.params.postUid;
   const postList = useSelector((state) => state.post.list);
   const post = postList.find((p) => p.postUid === _postUid);
-  console.log(postList);
+  const comments = post.comments;
+  console.log(post);
+
+  // const postIdx = postList.findIndex((p) => p._postUid === _postUid);
+  // const _post = postList[postIdx];
+
   return (
     <React.Fragment>
       {/* <Text margin="80px" size="2em" bold align="center">
@@ -152,10 +158,40 @@ const PostDetail = (props) => {
           </Grid>
           <CommentWrite postUid={_postUid} />
         </Grid>
-        <CommentList postUid={_postUid} />
+
+        <Grid margin="0px 0px 50px 0px">
+          {comments.map((comment, idx) => {
+            return (
+              <div>
+                <Grid isFlex>
+                  <Text size="1em">
+                    {comment.userUid}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    {comment.commentDate}
+                  </Text>
+                  <Button
+                    borderRadius="15px"
+                    backgroundColor="transparent"
+                    width="30px"
+                  >
+                    <DeleteIcon />
+                  </Button>
+                </Grid>
+
+                <Text size="1em" width="100%" padding="20px 0px 10px 0px">
+                  {comment.commentDesc}
+                </Text>
+                <Line />
+              </div>
+            );
+          })}
+        </Grid>
       </Grid>
     </React.Fragment>
   );
 };
+
+const Line = styled.hr`
+  border-top: 1px solid #bbb;
+`;
 
 export default PostDetail;
