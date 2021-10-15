@@ -1,5 +1,5 @@
 import React from "react";
-
+import styled from "styled-components";
 import { Grid, Text, Button, Image } from "../elements/index";
 
 import CommentWrite from "../components/CommentWrite";
@@ -183,10 +183,39 @@ const PostDetail = (props) => {
           </Grid>
           <CommentWrite postUid={props.postUid} />
         </Grid>
-        <CommentList comments={props.comments} />
+        <Grid margin="0px 0px 50px 0px">
+          {comments.map((comment, idx) => {
+            return (
+              <div>
+                <Grid isFlex>
+                  <Text size="1em">
+                    {comment.userUid}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    {comment.commentDate}
+                  </Text>
+                  <Button
+                    borderRadius="15px"
+                    backgroundColor="transparent"
+                    width="30px"
+                  >
+                    <DeleteIcon />
+                  </Button>
+                </Grid>
+
+                <Text size="1em" width="100%" padding="20px 0px 10px 0px">
+                  {comment.commentDesc}
+                </Text>
+                <Line />
+              </div>
+            );
+          })}
+        </Grid>
       </Grid>
     </React.Fragment>
   );
 };
+
+const Line = styled.hr`
+  border-top: 1px solid #bbb;
+`;
 
 export default PostDetail;
