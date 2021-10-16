@@ -1,49 +1,70 @@
 import React from "react";
 import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
 
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+
+import { apis } from "../lib/apis";
+import { actionCreators as postActions } from "../redux/modules/post";
 import { Grid, Text, Input, Button, Image } from "../elements/index";
-
 import CommentWrite from "../components/CommentWrite";
 import CommentList from "../components/CommentList";
 
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { useSelector } from "react-redux";
-
 const PostDetail = (props) => {
+  const postUid = props.match.params.postUid;
+  const { history } = props;
   const dispatch = useDispatch();
-  const _postUid = props.match.params.postUid;
+  // const _postUid = props.match.params.postUid;
+  // const list = useSelector((state) => state.post.list);
+  // const post = list.find((p) => p.postUid === _postUid);
+  let [post, setPost] = React.useState(null);
+  let [comments, setComments] = React.useState(null);
 
-  let post = null;
   React.useEffect(() => {
     async function fetchData() {
       // You can await here
-      post = await apis.getDetailPost(_postUid);
+
+      const res = await apis.getPostDetail(postUid);
+
+      setPost(res.data.post);
+      setComments(res.data.comments);
       // ...
     }
     fetchData();
+
     console.log("디테일 페이지입니다.");
   }, []);
 
-  const [postLikeCnt, setPostLikeCnt] = React.useState(post.postLikeCnt);
-  const [like, setLike] = React.useState(post.postLikeState);
+  console.log(post);
+  console.log(comments);
 
-  const updateLike = () => {
-    dispatch(postActions.toggleLikeMiddleware(post.postUid));
-    if (like) setPostLikeCnt(postLikeCnt + 1);
-    else setPostLikeCnt(postLikeCnt - 1);
-  };
+  // const updateLike = () => {
+  //   // dispatch(postActions.toggleLikeMiddleware(post.postUid));
+  //   if (!like) {
+  //     setLike(true);
+  //     setPostLikeCnt(postLikeCnt + 1);
+  //   } else {
+  //     setLike(false);
+  //     setPostLikeCnt(postLikeCnt - 1);
+  //   }
+  // };
 
+  // console.log(like);
   return (
     <React.Fragment>
-      {/* <Text margin="80px" size="2em" bold align="center">
-        상세페이지
-      </Text> */}
       <Grid width="800px" margin="100px auto">
         <Grid padding="10px 0px" width="100%" flexEnd>
-          <Button borderRadius="15px" backgroundColor="transparent" width="30px">
+          <Button
+            borderRadius="15px"
+            backgroundColor="transparent"
+            width="30px"
+            _onClick={() => {
+              history.push(`/PostWrite/${postUid}`);
+            }}
+          >
             <EditIcon />
           </Button>
           <Button
@@ -51,14 +72,36 @@ const PostDetail = (props) => {
             borderRadius="15px"
             backgroundColor="transparent"
             width="30px"
+            _onClick={() => {
+              dispatch(postActions.deletePostMiddleware(postUid));
+            }}
           >
             <DeleteIcon />
           </Button>
+
           <Grid isFlex>
-            <Button borderRadius="15px" backgroundColor="transparent" width="30px">
-              <FavoriteBorderIcon />
-            </Button>
-            <Text size="1em">1</Text>
+            {post.like ? (
+              // 채워진 하트
+              <Button
+                borderRadius="15px"
+                backgroundColor="transparent"
+                width="30px"
+                // _onClick={updateLike}
+              >
+                <FavoriteIcon />
+              </Button>
+            ) : (
+              // 빈  하트
+              <Button
+                borderRadius="15px"
+                backgroundColor="transparent"
+                width="30px"
+                // _onClick={updateLike}
+              >
+                <FavoriteBorderIcon />
+              </Button>
+            )}
+            <Text size="1em">{post.postLikeCnt}</Text>
           </Grid>
         </Grid>
 
@@ -155,9 +198,9 @@ const PostDetail = (props) => {
               {post.postDesc}
             </Text>
           </Grid>
-          <CommentWrite postUid={_postUid} />
+          <CommentWrite postUid={postUid} />
         </Grid>
-        <CommentList postUid={_postUid} />
+        <CommentList postUid={postUid} />
       </Grid>
     </React.Fragment>
   );

@@ -21,8 +21,8 @@ const loadMyPost = createAction(LOAD_MY_POST, () => ({}));
 const initialState = {
   userInfo: {},
   isLogin: false,
-  myRidingList: [],
-  myPostList: [],
+  // myRidingList: [],
+  // myPostList: [],
 };
 
 //middelware actions
@@ -80,10 +80,10 @@ const LogOut = () => {
 const LoginCheckDB = () => {
   return function (dispatch) {
     apis.loginCheck().then((res) => {
-      console.log(res);
+      // console.log(res);
 
       if (res.data.success === true) {
-        console.log(res);
+        // console.log(res);
         dispatch(
           setUser({
             userNickname: res.data.userNickname,

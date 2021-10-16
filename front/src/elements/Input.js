@@ -14,11 +14,11 @@ const Input = (props) => {
     label,
     multiLine,
     type,
-    value,
     placeholder,
     enterSubmit,
     _onChange,
     defaultValue,
+    value,
   } = props;
 
   const styles = {
@@ -28,6 +28,7 @@ const Input = (props) => {
     padding: padding,
     radius: radius,
     defaultValue: defaultValue,
+    value: value,
   };
 
   if (multiLine) {
@@ -41,7 +42,7 @@ const Input = (props) => {
           placeholder={placeholder}
           enterSubmit={enterSubmit}
           onChange={_onChange}
-          value={value}
+          value={value ? value : null}
           defaultValue={defaultValue ? defaultValue : null}
         />
       </>
@@ -53,13 +54,13 @@ const Input = (props) => {
       {label && <Text>{label}</Text>}
       <ElInput
         {...styles}
-        value={value}
+        // value={value}
         label={label}
         type={type}
         placeholder={placeholder}
         enterSubmit={enterSubmit}
         onChange={_onChange}
-        value={value}
+        value={value ? value : null}
         defaultValue={defaultValue ? defaultValue : null}
       />
     </>
@@ -74,12 +75,12 @@ Input.defaultProps = {
   radius: "",
   label: "",
   type: "text",
-  value: "",
+  value: false,
   multiLine: false,
   placeholder: "텍스트를 입력하세요",
   enterSubmit: () => {},
   _onChange: () => {},
-  value: "",
+  // value: false,
 };
 
 const ElInput = styled.input`

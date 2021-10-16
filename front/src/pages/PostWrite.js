@@ -6,6 +6,7 @@ import { actionCreators as postActions } from "../redux/modules/post";
 import TextField from "@mui/material/TextField";
 import { Grid, Text, Input, Button, Image } from "../elements/index";
 import { useDispatch } from "react-redux";
+import { SaveAltRounded } from "@mui/icons-material";
 
 const PostWrite = (props) => {
   const { history } = props;
@@ -36,6 +37,7 @@ const PostWrite = (props) => {
 
   const changeOrigin = (e) => {
     setOrigin(e.target.value);
+    console.log(e.target.value);
   };
 
   const changeDestination = (e) => {
@@ -78,6 +80,7 @@ const PostWrite = (props) => {
       startTime: startTime,
       postDate: moment().format("YYYY-MM-DD hh:mm:ss"),
     };
+    console.log(post);
     dispatch(postActions.addPostMiddleware(post));
   };
 
@@ -93,6 +96,7 @@ const PostWrite = (props) => {
       limitedUserNum: limitedUserNum,
       startTime: startTime,
     };
+
     dispatch(postActions.updatePostMiddleware(postUid, post));
   };
 
@@ -198,7 +202,6 @@ const PostWrite = (props) => {
             InputLabelProps={{ shrink: true }}
             onChange={selectDate}
             ref={dateInput}
-            value="2018-06-12T19:30"
           />
         </Grid>
         <Grid isFlex padding="25px 0px" width="77%" margin="0 auto">
