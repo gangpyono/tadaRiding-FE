@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const USER_TOKEN = sessionStorage.getItem("USER_TOKEN");
+
 const instance = axios.create({
   // 기본적으로 우리가 바라볼 서버의 주소
   baseURL: "http://52.79.249.178/",
@@ -8,13 +9,10 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   function (config) {
-    // 1. 요청 보내기 전에 실행
-    // store의 토큰 값 설정
     config.headers.Authorization = `Bearer ${USER_TOKEN}`;
     return config;
   },
   function (error) {
-    // Do something with request error
     console.log("err");
     return Promise.reject(error);
   }
@@ -37,7 +35,9 @@ export const apis = {
   deletePost: (id) => instance.delete(`/api/posts/${id}`),
 
   // 댓글 추가
-  addComment: (comment, id) => instance.post(`/api/posts/${id}/comments/`, comment),
+  addComment: (comment, id) =>
+    instance.post(`/api/posts/${id}/comments/`, comment),
+  // 댓글 삭제
   deleteComment: (postUid, commentUid) =>
     instance.delete(`/api/posts/${postUid}/comments/${commentUid}`),
   // 좋아요 추가

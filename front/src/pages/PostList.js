@@ -2,6 +2,7 @@ import React from "react";
 import Post from "../components/Post";
 import { useSelector, useDispatch } from "react-redux";
 
+import Permit from "../shared/Permit";
 import { Grid, Button } from "../elements/index.js";
 import { actionCreators as postActions } from "../redux/modules/post";
 import { apis } from "../lib/apis";
@@ -24,7 +25,9 @@ const PostList = (props) => {
     fetchData();
   }, []);
 
-  // console.log(pressedPosts);
+  const list = useSelector((state) => (state.post.list ? state.post.list : ""));
+  console.log(list);
+  const userUid = useSelector((state) => state.user.userInfo.userUid);
 
   // if (list.length === 0) return null;
   console.log(list);
