@@ -27,7 +27,7 @@ const PostList = (props) => {
 
   const list = useSelector((state) => (state.post.list ? state.post.list : ""));
 
-  // if (list.length === 0) return null;
+  if (list.length === 0) return null;
 
   return (
     <>

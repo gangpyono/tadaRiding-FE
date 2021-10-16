@@ -9,6 +9,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
+import Permit from "../shared//Permit";
 import apis from "../lib/apis";
 // actions
 import { addCommentDB, deleteCommentDB } from "../redux/modules/comment";
@@ -69,32 +70,42 @@ const PostDetail = (props) => {
     setCmt(" ");
   };
 
+  let isMe = false;
+  if (post.postRegister === user.userInfo.userNickname) isMe = true;
   return (
     <React.Fragment>
       <Grid width="800px" margin="100px auto">
         {/* buttons */}
         <Grid padding="10px 0px" width="100%" flexEnd>
-          <Button
-            borderRadius="15px"
-            backgroundColor="transparent"
-            width="30px"
-            _onClick={() => {
-              history.push(`/PostWrite/${_postUid}`);
-            }}
-          >
-            <EditIcon />
-          </Button>
-          <Button
-            margin="0px 10px 0px 0px"
-            borderRadius="15px"
-            backgroundColor="transparent"
-            width="30px"
-            _onClick={() => {
-              dispatch(postActions.deletePostMiddleware(_postUid));
-            }}
-          >
-            <DeleteIcon />
-          </Button>
+          <Permit>
+            {isMe ? (
+              <Grid>
+                <Button
+                  borderRadius="15px"
+                  backgroundColor="transparent"
+                  width="30px"
+                  _onClick={() => {
+                    history.push(`/PostWrite/${_postUid}`);
+                  }}
+                >
+                  <EditIcon />
+                </Button>
+                <Button
+                  margin="0px 10px 0px 0px"
+                  borderRadius="15px"
+                  backgroundColor="transparent"
+                  width="30px"
+                  _onClick={() => {
+                    dispatch(postActions.deletePostMiddleware(_postUid));
+                  }}
+                >
+                  <DeleteIcon />
+                </Button>{" "}
+              </Grid>
+            ) : (
+              <></>
+            )}
+          </Permit>
 
           <Grid isFlex>
             {user.isLogin && likeState ? (
@@ -195,6 +206,11 @@ const PostDetail = (props) => {
                         backgroundColor="#ffffee"
                         padding="8px"
                         _onClick={() => {
+                          if (post.limitedUserNum === post.attendUserNicknames.length) {
+                            alert("모집이 마감되었습니다.");
+                            return;
+                          }
+
                           let newAttendUserNicknames = [
                             ...post.attendUserNicknames,
                             user.userInfo.userNickname,
