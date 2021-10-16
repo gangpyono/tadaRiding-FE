@@ -124,7 +124,6 @@ const toggleLikeMiddleware = (postUid, likeState) => {
       apis
         .addLike(postUid)
         .then((res) => {
-          window.alert(res.data.msg);
           dispatch(toggleLike(postUid, likeState));
         })
         .catch(() => {
@@ -134,7 +133,6 @@ const toggleLikeMiddleware = (postUid, likeState) => {
       apis
         .deleteLike(postUid)
         .then((res) => {
-          window.alert(res.data.msg);
           dispatch(toggleLike(postUid, likeState));
         })
         .catch(() => {
@@ -142,6 +140,32 @@ const toggleLikeMiddleware = (postUid, likeState) => {
         });
     }
   };
+};
+
+//attend
+
+const attendMiddleware = (postUid, userUid) => {
+  console.log(postUid, userUid);
+
+  apis
+    .attendPost(postUid, userUid)
+    .then((res) => {
+      alert(res.data.msg);
+    })
+    .catch(() => {
+      window.alert("참석 실패");
+    });
+};
+
+const notAttendMiddleware = (postUid, userUid) => {
+  apis
+    .notAttendPost(postUid, userUid)
+    .then((res) => {
+      alert(res.data.msg);
+    })
+    .catch(() => {
+      window.alert("취소 실패");
+    });
 };
 
 //reducer
@@ -159,25 +183,19 @@ export default handleActions(
 
     [UPDATE_POST]: (state, action) =>
       produce(state, (draft) => {
-        const idx = draft.list.findIndex(
-          (p) => p.postUid === action.payload.post.postUid
-        );
+        const idx = draft.list.findIndex((p) => p.postUid === action.payload.post.postUid);
         draft.list[idx] = { ...draft.list[idx], ...action.payload.post };
       }),
 
     [DELETE_POST]: (state, action) =>
       produce(state, (draft) => {
-        const idx = draft.list.findIndex(
-          (p) => p.postUid === action.payload.postUid
-        );
+        const idx = draft.list.findIndex((p) => p.postUid === action.payload.postUid);
         draft.list.splice(idx, 1);
       }),
 
     [TOGGLE_LIKE]: (state, action) =>
       produce(state, (draft) => {
-        const idx = draft.list.findIndex(
-          (p) => p.postUid === action.payload.postUid
-        );
+        const idx = draft.list.findIndex((p) => p.postUid === action.payload.postUid);
         if (action.payload.likeState) {
           draft.list[idx].postLikeCnt = draft.list[idx].postLikeCnt + 1;
           draft.list[idx].likeState = true;
@@ -198,6 +216,8 @@ const actionCreators = {
   updatePostMiddleware,
   deletePostMiddleware,
   toggleLikeMiddleware,
+  attendMiddleware,
+  notAttendMiddleware,
 };
 
 export { actionCreators };

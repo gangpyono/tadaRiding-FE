@@ -19,7 +19,7 @@ const PostDetail = (props) => {
   const _postUid = props.match.params.postUid;
   const { history } = props;
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.userInfo);
+  const user = useSelector((state) => state.user);
 
   let [post, setPost] = React.useState("");
   let [comments, setComments] = React.useState("");
@@ -40,7 +40,8 @@ const PostDetail = (props) => {
 
       setPost(res.data.post);
       setComments(res.data.comments);
-      setLikeState(res.data.likeState);
+      setLikeState(res.data.post.likeState);
+
       // ...
     }
     fetchData();
@@ -48,17 +49,19 @@ const PostDetail = (props) => {
     console.log("디테일 페이지입니다.");
   }, []);
 
-  // console.log(post);
-  let commentInput = React.useRef();
+  if (!post) return null;
+
   const onChangeComment = (e) => {
     setCmt(e.target.value);
   };
+
   const onClickComment = () => {
     const _commentData = {
-      user: user.userUid,
+      userNickname: user.userinfo.userNickname,
       commentDesc: cmt,
       commentDate: today,
     };
+    console.log(_commentData);
     addCommentDB(commentData, post.postUid);
     const newComments = [...comments, _commentData];
     setComments(newComments);
@@ -66,18 +69,6 @@ const PostDetail = (props) => {
     setCmt(" ");
   };
 
-  // const updateLike = () => {
-  //   // dispatch(postActions.toggleLikeMiddleware(post.postUid));
-  //   if (!like) {
-  //     setLike(true);
-  //     setPostLikeCnt(postLikeCnt + 1);
-  //   } else {
-  //     setLike(false);
-  //     setPostLikeCnt(postLikeCnt - 1);
-  //   }
-  // };
-
-  // console.log(like);
   return (
     <React.Fragment>
       <Grid width="800px" margin="100px auto">
@@ -106,13 +97,19 @@ const PostDetail = (props) => {
           </Button>
 
           <Grid isFlex>
-            {likeState ? (
+            {user.isLogin && likeState ? (
               // 채워진 하트
               <Button
                 borderRadius="15px"
                 backgroundColor="transparent"
                 width="30px"
-                // _onClick={updateLike}
+                _onClick={() => {
+                  setLikeState(false);
+
+                  const newPostLikeCnt = post.postLikeCnt - 1;
+                  setPost({ ...post, postLikeCnt: newPostLikeCnt });
+                  dispatch(postActions.toggleLikeMiddleware(_postUid, false));
+                }}
               >
                 <FavoriteIcon />
               </Button>
@@ -122,7 +119,14 @@ const PostDetail = (props) => {
                 borderRadius="15px"
                 backgroundColor="transparent"
                 width="30px"
-                // _onClick={updateLike}
+                _onClick={() => {
+                  setLikeState(true);
+
+                  const newPostLikeCnt = post.postLikeCnt + 1;
+                  setPost({ ...post, postLikeCnt: newPostLikeCnt });
+
+                  dispatch(postActions.toggleLikeMiddleware(_postUid, true));
+                }}
               >
                 <FavoriteBorderIcon />
               </Button>
@@ -159,6 +163,56 @@ const PostDetail = (props) => {
                     ? `${post.attendUserNicknames.length}/${post.limitedUserNum}`
                     : ""}
                 </Text>
+
+                {/* 참석버튼 */}
+                <Grid isPosition="absolute">
+                  <Grid isPosition="absolute" right="-400px" top="-17px">
+                    {post.attendUserNicknames.includes(user.userInfo.userNickname) ? (
+                      <Button
+                        width="45px"
+                        isShadow
+                        backgroundColor="#ffffee"
+                        padding="8px"
+                        _onClick={() => {
+                          let newAttendUserNicknames = post.attendUserNicknames.filter(
+                            (nickName) => nickName !== user.userInfo.userNickname
+                          );
+
+                          setPost({
+                            ...post,
+                            attendUserNicknames: [...newAttendUserNicknames],
+                          });
+
+                          postActions.notAttendMiddleware(_postUid, user.userInfo.userUid);
+                        }}
+                      >
+                        취소
+                      </Button>
+                    ) : (
+                      <Button
+                        width="45px"
+                        isShadow
+                        backgroundColor="#ffffee"
+                        padding="8px"
+                        _onClick={() => {
+                          let newAttendUserNicknames = [
+                            ...post.attendUserNicknames,
+                            user.userInfo.userNickname,
+                          ];
+
+                          setPost({
+                            ...post,
+                            attendUserNicknames: [...newAttendUserNicknames],
+                          });
+                          console.log(_postUid, user.userInfo.userUid);
+                          postActions.attendMiddleware(_postUid, user.userInfo.userUid);
+                        }}
+                      >
+                        참가
+                      </Button>
+                    )}
+                  </Grid>
+                </Grid>
               </Grid>
 
               {/* 출발지 */}
@@ -235,8 +289,7 @@ const PostDetail = (props) => {
               padding="10px"
               width="100%"
               radius="15px"
-              // value={cmt}
-
+              value={cmt}
               placeholder="내용을 입력하세요"
               _onChange={onChangeComment}
             ></Input>
@@ -259,7 +312,7 @@ const PostDetail = (props) => {
                 <Grid key={comment.commentUid}>
                   <Grid isFlex>
                     <Text size="1em">
-                      {comment.userUid}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      {comment.userNickname}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                       {comment.commentDate}
                     </Text>
                     <Button
@@ -267,8 +320,12 @@ const PostDetail = (props) => {
                       backgroundColor="transparent"
                       width="30px"
                       _onClick={() => {
+                        let newComments = comments.filter(
+                          (c) => c.commentUid !== comment.commentUid
+                        );
+
+                        setComments(newComments);
                         deleteCommentDB(post.postUid, comment.commentUid);
-                        console.log(comment.commentUid);
                       }}
                     >
                       <DeleteIcon />

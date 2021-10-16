@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/configureStore";
 
 import { Grid, Button, Text, Image } from "../elements/index.js";
@@ -12,7 +12,7 @@ import { actionCreators as postActions } from "../redux/modules/post";
 
 const Post = (props) => {
   const dispatch = useDispatch();
-
+  const isLogin = useSelector((state) => state.user.isLogin);
   // React.useEffect(() => {
   //   setLikeState(props.isLike);
   // console.log(props);
@@ -80,7 +80,6 @@ const Post = (props) => {
             {props.attendUserNicknames
               ? `${props.attendUserNicknames.length}/${props.limitedUserNum}`
               : ""}
-            / {props.limitedUserNum}
           </Text>
 
           <Grid isFlex padding="10px">
@@ -88,13 +87,18 @@ const Post = (props) => {
               {props.postLikeCnt}
             </Text>
             {/* 좋아요 버튼 */}
-            {props.likeState ? (
+            {isLogin && props.likeState ? (
               <Button
                 width="12px"
                 backgroundColor="transparent"
                 borderRadius="0px"
                 padding="0px"
                 _onClick={() => {
+                  if (!isLogin) {
+                    window.alert("로그인정보가 없습니다.");
+                    history.replace("/Login");
+                    return;
+                  }
                   dispatch(postActions.toggleLikeMiddleware(props.postUid, false));
                 }}
               >
@@ -107,6 +111,11 @@ const Post = (props) => {
                 borderRadius="0px"
                 padding="0px"
                 _onClick={() => {
+                  if (!isLogin) {
+                    window.alert("로그인정보가 없습니다.");
+                    history.replace("/Login");
+                    return;
+                  }
                   dispatch(postActions.toggleLikeMiddleware(props.postUid, true));
                 }}
               >

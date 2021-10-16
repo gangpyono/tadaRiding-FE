@@ -12,7 +12,7 @@ const PostList = (props) => {
   const dispatch = useDispatch();
 
   // const [pressedPosts, setPressedPosts] = React.useState([]);
-  const list = useSelector((state) => state.post.list);
+
   const userInfo = useSelector((state) => state.user.userInfo);
 
   React.useEffect(() => {
@@ -26,48 +26,35 @@ const PostList = (props) => {
   }, []);
 
   const list = useSelector((state) => (state.post.list ? state.post.list : ""));
-  console.log(list);
-  const userUid = useSelector((state) => state.user.userInfo.userUid);
 
   // if (list.length === 0) return null;
-  console.log(list);
+
   return (
     <>
       <Grid mainFlex width="1300px" margin=" 100px auto 0px" wrap>
         {list.map((p) => {
           if (p.postRegister === userInfo.userNickname) {
-            console.log(p);
             return <Post key={p.postUid} {...p} basis="30%" isMe />;
           } else {
             return <Post key={p.postUid} {...p} basis="30%" />;
           }
           // return <Post key={p.postUid} {...p} basis="30%" isMe />;
         })}
-
-        <Button
-          isFloat="fixed"
-          size="30px"
-          backgroundColor="#4ba3c7"
-          _onClick={() => {
-            history.push("/PostWrite");
-          }}
-        >
-          +
-        </Button>
+        <Permit>
+          <Button
+            isFloat="fixed"
+            size="30px"
+            backgroundColor="#4ba3c7"
+            _onClick={() => {
+              history.push("/PostWrite");
+            }}
+          >
+            +
+          </Button>
+        </Permit>
       </Grid>
     </>
   );
-  // console.log(pressedPosts);
-  // apis
-  //   .getPost()
-  //   .then((res) => {
-  //     pressedList = res.data.pressedPosts;
-  //     const postList = res.data.posts;
-  //     dispatch(postActions.loadPost(postList));
-  //   })
-  //   .catch(() => {
-  //     window.alert("게시물불러오기에 실패하였습니다.");
-  //   });
 };
 
 export default PostList;

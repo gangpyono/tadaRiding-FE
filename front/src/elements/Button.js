@@ -14,6 +14,7 @@ const Button = (props) => {
     isFloat,
     children,
     isShadow,
+    _onMouseOver,
   } = props;
 
   const styles = {
@@ -26,6 +27,7 @@ const Button = (props) => {
     backgroundColor: backgroundColor,
     isFloat: isFloat,
     isShadow: isShadow,
+    _onMouseOver: _onMouseOver,
   };
 
   if (isFloat) {
@@ -40,9 +42,15 @@ const Button = (props) => {
 
   return (
     <>
-      <ElButton {...styles} onClick={_onClick}>
-        {children}
-      </ElButton>
+      {_onMouseOver ? (
+        <ElButton {...styles} onClick={_onClick} onMouseOver={_onMouseOver}>
+          {children}
+        </ElButton>
+      ) : (
+        <ElButton {...styles} onClick={_onClick}>
+          {children}
+        </ElButton>
+      )}
     </>
   );
 };
@@ -59,6 +67,7 @@ Button.defaultProps = {
   children: null,
   _onClick: () => {},
   isShadow: false,
+  _onMouseOver: () => {},
 };
 
 const ElButton = styled.button`
