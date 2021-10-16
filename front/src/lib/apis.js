@@ -9,13 +9,10 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   function (config) {
-    // 1. 요청 보내기 전에 실행
-    // store의 토큰 값 설정
     config.headers.Authorization = `Bearer ${USER_TOKEN}`;
     return config;
   },
   function (error) {
-    // Do something with request error
     console.log("err");
     return Promise.reject(error);
   }
@@ -43,6 +40,7 @@ export const apis = {
   // 댓글 추가
   addComment: (comment, id) =>
     instance.post(`/api/posts/${id}/comments/`, comment),
+  // 댓글 삭제
   deleteComment: (postUid, commentUid) =>
     instance.delete(`/api/posts/${postUid}/comments/${commentUid}`),
 };
