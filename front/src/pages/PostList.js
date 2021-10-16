@@ -3,25 +3,37 @@ import Post from "../components/Post";
 import { useSelector, useDispatch } from "react-redux";
 
 import { Grid, Button } from "../elements/index.js";
-//actions
 import { actionCreators as postActions } from "../redux/modules/post";
+import { apis } from "../lib/apis";
 
 const PostList = (props) => {
   const { history } = props;
   const dispatch = useDispatch();
 
+  // const [pressedPosts, setPressedPosts] = React.useState([]);
+  const list = useSelector((state) => state.post.list);
+  const userInfo = useSelector((state) => state.user.userInfo);
+
   React.useEffect(() => {
-    dispatch(postActions.loadPostMiddleware());
+    //백엔드에서 리스트 받아오기
+    async function fetchData() {
+      const res = await apis.getPost();
+      dispatch(postActions.loadPost(res.data.posts));
+      // setPressedPosts(res.data.pressedPosts);
+    }
+    fetchData();
   }, []);
 
-  const list = useSelector((state) => state.post.list);
-  const userUid = useSelector((state) => state.user.userInfo.userUid);
+  // console.log(pressedPosts);
 
+  // if (list.length === 0) return null;
+  console.log(list);
   return (
     <>
       <Grid mainFlex width="1300px" margin=" 100px auto 0px" wrap>
         {list.map((p) => {
-          if (p.postRegister === userUid) {
+          if (p.postRegister === userInfo.userNickname) {
+            console.log(p);
             return <Post key={p.postUid} {...p} basis="30%" isMe />;
           } else {
             return <Post key={p.postUid} {...p} basis="30%" />;
@@ -29,7 +41,6 @@ const PostList = (props) => {
           // return <Post key={p.postUid} {...p} basis="30%" isMe />;
         })}
 
-        {/* permit */}
         <Button
           isFloat="fixed"
           size="30px"
@@ -40,10 +51,20 @@ const PostList = (props) => {
         >
           +
         </Button>
-        {/* permit */}
       </Grid>
     </>
   );
+  // console.log(pressedPosts);
+  // apis
+  //   .getPost()
+  //   .then((res) => {
+  //     pressedList = res.data.pressedPosts;
+  //     const postList = res.data.posts;
+  //     dispatch(postActions.loadPost(postList));
+  //   })
+  //   .catch(() => {
+  //     window.alert("게시물불러오기에 실패하였습니다.");
+  //   });
 };
 
 export default PostList;

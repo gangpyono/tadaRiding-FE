@@ -6,6 +6,7 @@ import { actionCreators as postActions } from "../redux/modules/post";
 import TextField from "@mui/material/TextField";
 import { Grid, Text, Input, Button, Image } from "../elements/index";
 import { useDispatch } from "react-redux";
+import { SaveAltRounded } from "@mui/icons-material";
 
 const PostWrite = (props) => {
   const { history } = props;
@@ -17,13 +18,9 @@ const PostWrite = (props) => {
   const post = isEdit ? postList.find((p) => p.postUid === postUid) : null;
 
   const [postTitle, setPostTitle] = React.useState(post ? post.postTitle : "");
-  const [limitedUserNum, setLimitedUserNum] = React.useState(
-    post ? post.limitedUserNum : ""
-  );
+  const [limitedUserNum, setLimitedUserNum] = React.useState(post ? post.limitedUserNum : "");
   const [origin, setOrigin] = React.useState(post ? post.origin : "");
-  const [destination, setDestination] = React.useState(
-    post ? post.destination : ""
-  );
+  const [destination, setDestination] = React.useState(post ? post.destination : "");
   const [postDesc, setPostDesc] = React.useState(post ? post.postDesc : "");
   const [postImage, setPostImage] = React.useState(post ? post.postImage : "");
   // 수정시 날짜 T 넣어줄것.
@@ -40,6 +37,7 @@ const PostWrite = (props) => {
 
   const changeOrigin = (e) => {
     setOrigin(e.target.value);
+    console.log(e.target.value);
   };
 
   const changeDestination = (e) => {
@@ -98,6 +96,7 @@ const PostWrite = (props) => {
       limitedUserNum: limitedUserNum,
       startTime: startTime,
     };
+
     dispatch(postActions.updatePostMiddleware(postUid, post));
   };
 
@@ -223,21 +222,11 @@ const PostWrite = (props) => {
         <Grid isFlex width="300px" margin="50px auto">
           {/* 수정/추가버튼 */}
           {isEdit ? (
-            <Button
-              isShadow
-              padding="10px"
-              backgroundColor="#ffffee"
-              _onClick={updatePost}
-            >
+            <Button isShadow padding="10px" backgroundColor="#ffffee" _onClick={updatePost}>
               수정완료
             </Button>
           ) : (
-            <Button
-              isShadow
-              padding="10px"
-              backgroundColor="#ffffee"
-              _onClick={addPost}
-            >
+            <Button isShadow padding="10px" backgroundColor="#ffffee" _onClick={addPost}>
               게시물 생성
             </Button>
           )}

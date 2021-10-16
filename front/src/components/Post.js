@@ -5,6 +5,7 @@ import { history } from "../redux/configureStore";
 
 import { Grid, Button, Text, Image } from "../elements/index.js";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { actionCreators as postActions } from "../redux/modules/post";
@@ -12,6 +13,9 @@ import { actionCreators as postActions } from "../redux/modules/post";
 const Post = (props) => {
   const dispatch = useDispatch();
 
+  // React.useEffect(() => {
+  //   setLikeState(props.isLike);
+  // console.log(props);
   return (
     <Grid
       bg="#e1f5fe"
@@ -73,27 +77,42 @@ const Post = (props) => {
           <Text size="15px">출발일 : {props.startTime}</Text>
           <Text size="15px">
             인원수 :
-            {props.participants
-              ? `${props.participants.length}` / `${props.limitedUserNum}`
+            {props.attendUserNicknames
+              ? `${props.attendUserNicknames.length}/${props.limitedUserNum}`
               : ""}
+            / {props.limitedUserNum}
           </Text>
 
           <Grid isFlex padding="10px">
             <Text size="15px" margin="10px">
-              1
+              {props.postLikeCnt}
             </Text>
             {/* 좋아요 버튼 */}
-            <Button
-              width="12px"
-              backgroundColor="transparent"
-              borderRadius="0px"
-              padding="0px"
-              _onClick={() => {
-                // dispatch(postActions);
-              }}
-            >
-              <FavoriteBorderIcon />
-            </Button>
+            {props.likeState ? (
+              <Button
+                width="12px"
+                backgroundColor="transparent"
+                borderRadius="0px"
+                padding="0px"
+                _onClick={() => {
+                  dispatch(postActions.toggleLikeMiddleware(props.postUid, false));
+                }}
+              >
+                <FavoriteIcon />
+              </Button>
+            ) : (
+              <Button
+                width="12px"
+                backgroundColor="transparent"
+                borderRadius="0px"
+                padding="0px"
+                _onClick={() => {
+                  dispatch(postActions.toggleLikeMiddleware(props.postUid, true));
+                }}
+              >
+                <FavoriteBorderIcon />
+              </Button>
+            )}
           </Grid>
         </Grid>
 

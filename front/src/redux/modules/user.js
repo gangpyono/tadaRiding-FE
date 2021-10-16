@@ -15,8 +15,8 @@ const logOut = createAction(LOG_OUT, () => ({}));
 const initialState = {
   userInfo: {},
   isLogin: false,
-  myRidingList: [],
-  myPostList: [],
+  // myRidingList: [],
+  // myPostList: [],
 };
 
 //middelware actions
@@ -74,7 +74,10 @@ const LogOut = () => {
 const LoginCheckDB = () => {
   return function (dispatch) {
     apis.loginCheck().then((res) => {
+      // console.log(res);
+
       if (res.data.success === true) {
+        // console.log(res);
         dispatch(
           setUser({
             userNickname: res.data.userNickname,

@@ -21,6 +21,7 @@ function App() {
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(userActions.LoginCheckDB());
+    console.log("APP");
   }, []);
 
   return (

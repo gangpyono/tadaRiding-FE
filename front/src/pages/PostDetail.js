@@ -2,53 +2,56 @@ import React from "react";
 import styled from "styled-components";
 import { Grid, Text, Button, Image, Input } from "../elements/index";
 
-// import CommentWrite from "../components/CommentWrite";
-// import CommentList from "../components/CommentList";
+import { useSelector, useDispatch } from "react-redux";
 
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useDispatch, useSelector } from "react-redux";
-// axios instance
+
 import apis from "../lib/apis";
 // actions
 import { addCommentDB, deleteCommentDB } from "../redux/modules/comment";
 import { actionCreators as postActions } from "../redux/modules/post";
 import moment from "moment";
-// import { addCommentDB, deleteCommentDB } from "../redux/modules/comment";
 
 const PostDetail = (props) => {
-  const user = useSelector((state) => state.user.userInfo);
-  const dispatch = useDispatch();
   const _postUid = props.match.params.postUid;
-  const [post, setPost] = React.useState("");
-  const [comment, setcomment] = React.useState("");
-  const [cmt, setCmt] = React.useState("");
+  const { history } = props;
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.userInfo);
+
+  let [post, setPost] = React.useState("");
+  let [comments, setComments] = React.useState("");
+  const [likeState, setLikeState] = React.useState("");
+
   const today = moment().format("YYYY-MM-DD");
+  const [cmt, setCmt] = React.useState("");
   const commentData = {
     commentDesc: cmt,
     commentDate: today,
   };
 
   React.useEffect(() => {
-    apis
-      .getDetail(_postUid)
-      .then((res) => {
-        // console.log(res.data);
-        const post = res.data.post;
-        setPost(post);
-        const comment = res.data.comments;
-        setcomment(comment);
-      })
-      .catch((err) => console.log(err));
+    async function fetchData() {
+      // You can await here
+
+      const res = await apis.getPostDetail(_postUid);
+
+      setPost(res.data.post);
+      setComments(res.data.comments);
+      setLikeState(res.data.likeState);
+      // ...
+    }
+    fetchData();
+
     console.log("디테일 페이지입니다.");
   }, []);
-  console.log(post);
-  console.log(comment);
+
+  // console.log(post);
+  let commentInput = React.useRef();
   const onChangeComment = (e) => {
     setCmt(e.target.value);
-    console.log("내용입력");
   };
   const onClickComment = () => {
     const _commentData = {
@@ -57,20 +60,24 @@ const PostDetail = (props) => {
       commentDate: today,
     };
     addCommentDB(commentData, post.postUid);
-    const newComments = [...comment, _commentData];
-    setcomment(newComments);
-    setCmt("");
+    const newComments = [...comments, _commentData];
+    setComments(newComments);
+
+    setCmt(" ");
   };
 
-  const [postLikeCnt, setPostLikeCnt] = React.useState(post.postLikeCnt);
-  const [like, setLike] = React.useState(post.postLikeState);
+  // const updateLike = () => {
+  //   // dispatch(postActions.toggleLikeMiddleware(post.postUid));
+  //   if (!like) {
+  //     setLike(true);
+  //     setPostLikeCnt(postLikeCnt + 1);
+  //   } else {
+  //     setLike(false);
+  //     setPostLikeCnt(postLikeCnt - 1);
+  //   }
+  // };
 
-  const updateLike = () => {
-    dispatch(postActions.toggleLikeMiddleware(post.postUid));
-    if (like) setPostLikeCnt(postLikeCnt + 1);
-    else setPostLikeCnt(postLikeCnt - 1);
-  };
-
+  // console.log(like);
   return (
     <React.Fragment>
       <Grid width="800px" margin="100px auto">
@@ -80,6 +87,9 @@ const PostDetail = (props) => {
             borderRadius="15px"
             backgroundColor="transparent"
             width="30px"
+            _onClick={() => {
+              history.push(`/PostWrite/${_postUid}`);
+            }}
           >
             <EditIcon />
           </Button>
@@ -88,27 +98,39 @@ const PostDetail = (props) => {
             borderRadius="15px"
             backgroundColor="transparent"
             width="30px"
+            _onClick={() => {
+              dispatch(postActions.deletePostMiddleware(_postUid));
+            }}
           >
             <DeleteIcon />
           </Button>
+
           <Grid isFlex>
-            <Button
-              borderRadius="15px"
-              backgroundColor="transparent"
-              width="30px"
-            >
-              <FavoriteBorderIcon />
-            </Button>
-            <Text size="1em">1</Text>
+            {likeState ? (
+              // 채워진 하트
+              <Button
+                borderRadius="15px"
+                backgroundColor="transparent"
+                width="30px"
+                // _onClick={updateLike}
+              >
+                <FavoriteIcon />
+              </Button>
+            ) : (
+              // 빈  하트
+              <Button
+                borderRadius="15px"
+                backgroundColor="transparent"
+                width="30px"
+                // _onClick={updateLike}
+              >
+                <FavoriteBorderIcon />
+              </Button>
+            )}
+            <Text size="1em">{post.postLikeCnt}</Text>
           </Grid>
         </Grid>
-        <Grid
-          width="100%"
-          padding="55px"
-          borderRadius="15px"
-          bg="#e1f5fe"
-          isShadow
-        >
+        <Grid width="100%" padding="55px" borderRadius="15px" bg="#e1f5fe" isShadow>
           {/* 제목 */}
           <Text size="2em" bold margin="20px 0px 0px 20px" color="#727e82">
             {post.postTitle}
@@ -196,17 +218,12 @@ const PostDetail = (props) => {
             <Text padding="10px 0px" size="1em" bold color="#727e82">
               내용
             </Text>
-            <Text
-              padding="10px"
-              bg="white"
-              borderRadius="10px"
-              width="100%"
-              size="1em"
-            >
+            <Text padding="10px" bg="white" borderRadius="10px" width="100%" size="1em">
               {post.postDesc}
             </Text>
           </Grid>
-          {/* <CommentWrite Comment={commentData} /> */}
+
+          {/* 댓글 */}
 
           <Text padding="16px 0px" size="1em" bold color="#727e82">
             댓글
@@ -218,7 +235,8 @@ const PostDetail = (props) => {
               padding="10px"
               width="100%"
               radius="15px"
-              value={cmt}
+              // value={cmt}
+
               placeholder="내용을 입력하세요"
               _onChange={onChangeComment}
             ></Input>
@@ -234,23 +252,23 @@ const PostDetail = (props) => {
             </Button>
           </Grid>
         </Grid>
-        {comment ? (
+        {comments ? (
           <Grid margin="0px 0px 50px 0px">
-            {comment.map((comments, idx) => {
+            {comments.map((comment, idx) => {
               return (
-                <Grid>
+                <Grid key={comment.commentUid}>
                   <Grid isFlex>
                     <Text size="1em">
-                      {comments.userUid}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      {comments.commentDate}
+                      {comment.userUid}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      {comment.commentDate}
                     </Text>
                     <Button
                       borderRadius="15px"
                       backgroundColor="transparent"
                       width="30px"
                       _onClick={() => {
-                        deleteCommentDB(post.postUid, comments.commentUid);
-                        console.log(comments.commentUid);
+                        deleteCommentDB(post.postUid, comment.commentUid);
+                        console.log(comment.commentUid);
                       }}
                     >
                       <DeleteIcon />
@@ -258,7 +276,7 @@ const PostDetail = (props) => {
                   </Grid>
 
                   <Text size="1em" width="100%" padding="20px 0px 10px 0px">
-                    {comments.commentDesc}
+                    {comment.commentDesc}
                   </Text>
                   <Line />
                 </Grid>

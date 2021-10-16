@@ -5,7 +5,6 @@ import { connectRouter } from "connected-react-router";
 
 import user from "./modules/user";
 import post from "./modules/post";
-import comment from "./modules/comment";
 
 export const history = createBrowserHistory(); // hsitory 객체생성
 
