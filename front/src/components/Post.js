@@ -13,9 +13,6 @@ import { actionCreators as postActions } from "../redux/modules/post";
 const Post = (props) => {
   const dispatch = useDispatch();
 
-  // React.useEffect(() => {
-  //   setLikeState(props.isLike);
-  // console.log(props);
   return (
     <Grid
       bg="#e1f5fe"
@@ -95,7 +92,9 @@ const Post = (props) => {
                 borderRadius="0px"
                 padding="0px"
                 _onClick={() => {
-                  dispatch(postActions.toggleLikeMiddleware(props.postUid, false));
+                  dispatch(
+                    postActions.toggleLikeMiddleware(props.postUid, false)
+                  );
                 }}
               >
                 <FavoriteIcon />
@@ -107,7 +106,9 @@ const Post = (props) => {
                 borderRadius="0px"
                 padding="0px"
                 _onClick={() => {
-                  dispatch(postActions.toggleLikeMiddleware(props.postUid, true));
+                  dispatch(
+                    postActions.toggleLikeMiddleware(props.postUid, true)
+                  );
                 }}
               >
                 <FavoriteBorderIcon />

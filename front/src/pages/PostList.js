@@ -12,7 +12,6 @@ const PostList = (props) => {
   const dispatch = useDispatch();
 
   // const [pressedPosts, setPressedPosts] = React.useState([]);
-  const list = useSelector((state) => state.post.list);
   const userInfo = useSelector((state) => state.user.userInfo);
 
   React.useEffect(() => {
@@ -36,7 +35,6 @@ const PostList = (props) => {
       <Grid mainFlex width="1300px" margin=" 100px auto 0px" wrap>
         {list.map((p) => {
           if (p.postRegister === userInfo.userNickname) {
-            console.log(p);
             return <Post key={p.postUid} {...p} basis="30%" isMe />;
           } else {
             return <Post key={p.postUid} {...p} basis="30%" />;

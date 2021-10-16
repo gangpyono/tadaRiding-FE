@@ -33,7 +33,6 @@ export const apis = {
   editPost: (id, content) => instance.put(`/api/posts/${id}`, content),
   // 게시물 삭제하기
   deletePost: (id) => instance.delete(`/api/posts/${id}`),
-
   // 댓글 추가
   addComment: (comment, id) =>
     instance.post(`/api/posts/${id}/comments/`, comment),
@@ -44,8 +43,10 @@ export const apis = {
   addLike: (id) => instance.post(`/api/likes/${id}`),
   // 좋아요 취소
   deleteLike: (id) => instance.delete(`/api/likes/${id}`),
-
+  // 상세페이지 불러오기
   getPostDetail: (id) => instance.get(`/posts/${id}`),
+  // 마이페이지 불러오기
+  getMyPage: (id) => instance.get(`/users/${id}`),
 };
 
 export default apis;
