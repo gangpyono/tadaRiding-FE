@@ -99,7 +99,9 @@ const Post = (props) => {
                     history.replace("/Login");
                     return;
                   }
-                  dispatch(postActions.toggleLikeMiddleware(props.postUid, false));
+                  dispatch(
+                    postActions.toggleLikeMiddleware(props.postUid, false)
+                  );
                 }}
               >
                 <FavoriteIcon />
@@ -116,7 +118,9 @@ const Post = (props) => {
                     history.replace("/Login");
                     return;
                   }
-                  dispatch(postActions.toggleLikeMiddleware(props.postUid, true));
+                  dispatch(
+                    postActions.toggleLikeMiddleware(props.postUid, true)
+                  );
                 }}
               >
                 <FavoriteBorderIcon />

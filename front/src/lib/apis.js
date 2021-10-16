@@ -38,7 +38,8 @@ export const apis = {
   getPostDetail: (id) => instance.get(`/posts/${id}`),
 
   // 댓글 추가
-  addComment: (comment, id) => instance.post(`/api/posts/${id}/comments/`, comment),
+  addComment: (comment, id) =>
+    instance.post(`/api/posts/${id}/comments/`, comment),
   // 댓글 삭제
   deleteComment: (postUid, commentUid) =>
     instance.delete(`/api/posts/${postUid}/comments/${commentUid}`),
@@ -49,10 +50,14 @@ export const apis = {
   deleteLike: (id) => instance.delete(`/api/likes/${id}`),
 
   // 모임 참석
-  attendPost: (postUid, userUid) => instance.post(`/api/posts/${postUid}/${userUid}`),
+  attendPost: (postUid, userUid) =>
+    instance.post(`/api/posts/${postUid}/${userUid}`),
 
   // 모임 취소
-  notAttendPost: (postUid, userUid) => instance.delete(`/api/posts/${postUid}/${userUid}`),
+  notAttendPost: (postUid, userUid) =>
+    instance.delete(`/api/posts/${postUid}/${userUid}`),
+  // 마이페이지 불러오기
+  getMyPage: (id) => instance.get(`/users/${id}`),
 };
 
 export default apis;

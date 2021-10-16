@@ -20,7 +20,7 @@ const Header = (props) => {
             _onClick={() => {
               history.push("/");
             }}
-            size="2em"
+            size="3rem"
             bold
             color="#ffffee"
             cursor
@@ -30,24 +30,24 @@ const Header = (props) => {
           <Grid isFlex>
             <Button
               isShadow
-              margin="0px 20px"
-              padding="10px"
+              margin="0px 30px"
+              padding="20px 10px"
               backgroundColor="#ffffee"
               _onClick={() => {
                 history.push("/mypage");
               }}
             >
-              마이페이지
+              <Text size="1.2rem">마이페이지</Text>
             </Button>
             <Button
               isShadow
-              padding="10px"
+              padding="20px 10px"
               backgroundColor="#ffffee"
               _onClick={() => {
                 dispatch(userActions.LogOut());
               }}
             >
-              로그아웃
+              <Text size="1.2rem">로그아웃</Text>
             </Button>
           </Grid>
         </Grid>
@@ -63,7 +63,7 @@ const Header = (props) => {
           _onClick={() => {
             history.push("/");
           }}
-          size="2em"
+          size="3rem"
           bold
           color="#ffffee"
           cursor
@@ -73,24 +73,27 @@ const Header = (props) => {
         <Grid isFlex>
           <Button
             isShadow
-            margin="0px 20px"
-            padding="10px"
+            margin="0px 30px"
+            padding="20px 10px"
             backgroundColor="#ffffee"
             _onClick={() => {
               history.push("/login");
             }}
           >
-            로그인
+            <Text size="1.2rem">로그인</Text>
           </Button>
+
+          {/* </Button> */}
           <Button
             isShadow
-            padding="10px"
+            margin="0px 30px"
+            padding="20px 10px"
             backgroundColor="#ffffee"
             _onClick={() => {
               history.push("/signup");
             }}
           >
-            회원가입
+            <Text size="1.2rem">회원가입</Text>
           </Button>
         </Grid>
       </Grid>

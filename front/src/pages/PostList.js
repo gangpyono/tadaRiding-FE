@@ -12,7 +12,6 @@ const PostList = (props) => {
   const dispatch = useDispatch();
 
   // const [pressedPosts, setPressedPosts] = React.useState([]);
-
   const userInfo = useSelector((state) => state.user.userInfo);
 
   React.useEffect(() => {
